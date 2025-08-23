@@ -1,7 +1,7 @@
 
 import { User, Transaction, JWTTokenResponse, TwoFactorRequiredResponse, KycStatusResponse, WithdrawalRequest, KycRequest, AdminStats } from '../types';
 
-const API_BASE_URL = 'https://optivison-backend.onrender.com'; // Assuming the API is on the same domain
+const API_BASE_URL = 'https://optivlivebackend.onrender.com'; // Assuming the API is on the same domain
 
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 
