@@ -63,7 +63,7 @@ export const validateInput = (input: string, fieldName: string) => {
 // --- Authentication & Users ---
 
 export const login = (email: string, password: string): Promise<JWTTokenResponse | TwoFactorRequiredResponse> => 
-    apiRequest(`/users/login/`, 'POST', { email, password });
+    apiRequest(`/auth/login`, 'POST', { email, password });
 
 export const verifyTwoFactor = (userId: string, token: string): Promise<JWTTokenResponse> =>
     apiRequest(`/users/2fa/verify/`, 'POST', { user_id: userId, token });
