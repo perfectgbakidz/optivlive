@@ -23,8 +23,8 @@ export const ForgotPasswordPage: React.FC = () => {
     setMessage('');
     setError('');
     try {
-        const result = await api.mockForgotPassword(email);
-        setMessage(result.message);
+        await api.requestPasswordReset(email);
+        setMessage(t('forgotPasswordPage.success.message'));
         setSuccess(true);
     } catch (err: any) {
         // Even on error, show the generic success message for security to prevent email enumeration.

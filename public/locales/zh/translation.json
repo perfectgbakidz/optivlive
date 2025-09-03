@@ -53,7 +53,9 @@
       "failed": "失败",
       "active": "活跃",
       "frozen": "已冻结",
-      "paused": "已暂停"
+      "paused": "已暂停",
+      "verified": "已验证",
+      "unverified": "未验证"
     }
   },
   "forms": {
@@ -99,6 +101,12 @@
       "usernameAvailable": "用户名可用！",
       "usernameTaken": "用户名已被占用。",
       "referralCodePlaceholder": "推荐码",
+      "firstNamePlaceholder": "名",
+      "lastNamePlaceholder": "姓",
+      "usernamePlaceholder": "用户名",
+      "emailPlaceholder": "电子邮件地址",
+      "passwordPlaceholder": "密码",
+      "confirmPasswordPlaceholder": "确认密码",
       "button": "创建",
       "hasAccount": "已有账户？"
     },
@@ -225,7 +233,6 @@
         "content": [
           "我们采取合理措施帮助保护您的信息免遭丢失、盗窃、滥用以及未经授权的访问、披露、更改和销毁。"
         ]
-
       }
     ]
   },
@@ -405,8 +412,8 @@
     }
   },
   "testingBanner": {
-    "title": "测试模式已激活",
-    "description": "此应用程序正在模拟环境中运行。所有数据均为模拟数据。",
+    "title": "实时演示",
+    "description": "这是一个实时演示环境。您可以使用以下凭据进行测试。",
     "userLogin": "用户登录：",
     "email": "电子邮件：",
     "pass": "密码：",
@@ -590,17 +597,19 @@
         "kycManagement": "KYC 管理",
         "withdrawals": "提款",
         "transactions": "交易",
-        "role": "管理员"
+        "role": "管理员",
+        "settings": "设置"
     },
     "overview": {
         "title": "管理员仪表板",
         "masterDashboardTitle": "主账户仪表板",
-        "totalRefEarnings": "总推荐收入",
+        "myRefEarnings": "我的推荐收入",
         "balance": "余额",
         "withdrawalsCard": {
             "title": "提款管理",
             "subtitle": "管理和提取主账户的余额。",
-            "link": "前往提款 →"
+            "withdraw_button": "提取我的余额",
+            "manage_users_link": "管理用户提款 →"
         },
         "platformControlsTitle": "平台控制与概览",
         "totalUserEarnings": "用户总推荐收入",
@@ -619,6 +628,17 @@
             "title": "全局提款控制",
             "allUserWithdrawals": "所有用户提款",
             "desc": "此开关可立即暂停或恢复平台上所有用户的提款。"
+        },
+        "metricsExplainedTitle": "指标说明",
+        "metrics": {
+            "myEarningsTitle": "什么是“我的推荐收入”？",
+            "myEarningsDesc": "这是“主”管理员账户通过其自己的推荐码直接赚取的总佣金。",
+            "myBalanceTitle": "什么是“我的余额”？",
+            "myBalanceDesc": "这是“主”管理员账户本身持有的当前可提取余额，与主要协议资金分开。",
+            "totalUserEarningsTitle": "什么是“用户总推荐收入”？",
+            "totalUserEarningsDesc": "这表示从协议支付给系统中每个用户的所有佣金的总和。",
+            "protocolBalanceTitle": "什么是“协议余额”？",
+            "protocolBalanceDesc": "此数字显示在扣除所有用户佣金后协议持有的总资金。它是可供行政提取的主要资金池。"
         }
     },
     "userManagement": {
@@ -649,12 +669,12 @@
     },
     "createUserModal": {
         "title": "创建新的二级账户",
-        "desc": "手动创建一个新用户账户。此账户不需要支付费用。您可以选择性地分配一个推荐人。",
-        "firstName": "名字",
-        "lastName": "姓氏",
+        "desc": "手动创建一个新的用户账户。此账户不需要支付费用。您可以选择性地分配一个推荐人。",
+        "firstName": "名",
+        "lastName": "姓",
         "email": "电子邮件地址",
         "username": "用户名",
-        "referrer": "推荐人用户名（可选）",
+        "referrer": "推荐人代码",
         "password": "密码",
         "passwordNote": "提供了默认密码。用户登录后可以更改。",
         "button": "创建用户"
@@ -681,6 +701,35 @@
             "reasonLabel": "拒绝原因（可选）",
             "reasonPlaceholder": "例如，文件模糊。",
             "confirm": "确认拒绝"
+        }
+    },
+    "settings": {
+        "title": "管理员设置",
+        "password": {
+            "title": "更改密码",
+            "current": "当前密码",
+            "new": "新密码",
+            "confirm": "确认新密码",
+            "button": "更改密码"
+        },
+        "pin": {
+            "changeButton": "更改 PIN",
+            "currentPassword": "当前管理员密码",
+            "saveButton": "保存新 PIN"
+        },
+        "2fa": {
+            "title": "双因素认证 (2FA)",
+            "description": "通过在登录时要求第二次验证步骤来增强您的账户安全。",
+            "enableModalTitle": "启用 2FA",
+            "disableModalTitle": "禁用 2FA",
+            "enableStep1": "1. 使用您的验证器应用扫描此二维码。",
+            "enableStep2": "或手动输入此密钥：",
+            "enableStep3": "2. 输入您应用中的 6 位代码。",
+            "verificationCode": "验证码",
+            "buttonVerifyEnable": "验证并启用",
+            "disablePrompt": "为确认，请输入您验证器应用中的 6 位代码。",
+            "authCode": "认证码",
+            "buttonVerifyDisable": "确认并禁用"
         }
     }
   }

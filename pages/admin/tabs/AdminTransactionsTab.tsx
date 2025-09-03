@@ -21,17 +21,17 @@ const StatusBadge: React.FC<{ status: Transaction['status'] }> = ({ status }) =>
 export const AdminTransactionsTab: React.FC = () => {
     const { t } = useTranslation();
     const [transactions, setTransactions] = useState<Transaction[]>([]);
-    const [page, setPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
     const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState('');
 
-    const fetchHistory = useCallback(async (pageNum: number) => {
+    const fetchHistory = useCallback(async () => {
         setIsLoading(true);
+        setError('');
         try {
-            const data = await api.mockFetchAllTransactions(pageNum);
-            setTransactions(data.transactions);
-            setTotalPages(data.totalPages);
-        } catch (error) {
+            const data = await api.adminListTransactions();
+            setTransactions(data);
+        } catch (error: any) {
+            setError(error.message || 'Failed to fetch transactions.');
             console.error(error);
         } finally {
             setIsLoading(false);
@@ -39,25 +39,28 @@ export const AdminTransactionsTab: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        fetchHistory(page);
-    }, [page, fetchHistory]);
+        fetchHistory();
+    }, [fetchHistory]);
     
+    if (isLoading) return <Spinner />;
+    if (error) return <div className="text-error text-center p-4">{error}</div>;
+
     return (
         <div className="space-y-8">
             <h1 className="text-3xl font-bold text-white">{t('admin.transactions.title')}</h1>
             <div className="bg-brand-panel backdrop-blur-lg border border-brand-ui-element/20 rounded-lg shadow-lg overflow-hidden">
-                {isLoading ? <Spinner /> : (
+                {transactions.length === 0 ? <p className="p-8 text-center text-brand-light-gray">No transactions found.</p> : (
                     <>
                         {/* Mobile View */}
                         <div className="md:hidden">
                             <div className="p-4 space-y-4">
                                 {transactions.map(tx => {
-                                    const amount = parseFloat(tx.amount);
+                                    const amount = tx.amount;
                                     return (
                                         <div key={tx.id} className="bg-brand-dark/30 p-4 rounded-lg border border-brand-ui-element/20">
                                             <div className="flex justify-between items-start mb-2">
                                                 <div>
-                                                    <p className="font-bold text-white capitalize">{tx.tx_type}</p>
+                                                    <p className="font-bold text-white capitalize">{tx.type.replace('_', ' ')}</p>
                                                     {tx.user ? (
                                                         <>
                                                             <p className="text-sm text-brand-light-gray">{tx.user.name}</p>
@@ -66,7 +69,6 @@ export const AdminTransactionsTab: React.FC = () => {
                                                     ) : (
                                                         <p className="text-sm text-brand-light-gray">N/A</p>
                                                     )}
-                                                    <p className="text-xs text-brand-ui-element/80 mt-1">{tx.reference}</p>
                                                 </div>
                                                 <p className={`font-mono text-lg shrink-0 ml-4 ${amount >= 0 ? 'text-success' : 'text-error'}`}>
                                                     {amount >= 0 ? '+' : ''}£{Math.abs(amount).toFixed(2)}
@@ -90,14 +92,13 @@ export const AdminTransactionsTab: React.FC = () => {
                                         <th className="p-4 font-semibold text-brand-white">{t('dashboard.history.date')}</th>
                                         <th className="p-4 font-semibold text-brand-white">{t('admin.userManagement.table.name')}</th>
                                         <th className="p-4 font-semibold text-brand-white">{t('dashboard.history.type')}</th>
-                                        <th className="p-4 font-semibold text-brand-white">{t('dashboard.history.description')}</th>
                                         <th className="p-4 font-semibold text-right text-brand-white">{t('dashboard.history.amount')}</th>
                                         <th className="p-4 font-semibold text-center text-brand-white">{t('dashboard.history.status')}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {transactions.map(tx => {
-                                        const amount = parseFloat(tx.amount);
+                                        const amount = tx.amount;
                                         return (
                                             <tr key={tx.id} className="border-b border-brand-ui-element/20 last:border-0 hover:bg-brand-ui-element/10">
                                                 <td className="p-4 whitespace-nowrap">{new Date(tx.created_at).toLocaleDateString()}</td>
@@ -111,8 +112,7 @@ export const AdminTransactionsTab: React.FC = () => {
                                                         "N/A"
                                                     )}
                                                 </td>
-                                                <td className="p-4 capitalize">{tx.tx_type}</td>
-                                                <td className="p-4 text-brand-light-gray">{tx.reference}</td>
+                                                <td className="p-4 capitalize">{tx.type.replace('_', ' ')}</td>
                                                 <td className={`p-4 font-mono text-right ${amount >= 0 ? 'text-success' : 'text-error'}`}>
                                                     {amount >= 0 ? '+' : ''}£{Math.abs(amount).toFixed(2)}
                                                 </td>
@@ -125,11 +125,6 @@ export const AdminTransactionsTab: React.FC = () => {
                         </div>
                     </>
                 )}
-                <div className="p-4 bg-brand-dark/50 flex justify-between items-center">
-                    <Button onClick={() => setPage(p => p - 1)} disabled={page <= 1 || isLoading} variant="secondary">{t('dashboard.history.previous')}</Button>
-                    <span className="text-brand-light-gray">{t('dashboard.history.pageOf', { page, totalPages })}</span>
-                    <Button onClick={() => setPage(p => p + 1)} disabled={page >= totalPages || isLoading} variant="secondary">{t('dashboard.history.next')}</Button>
-                </div>
             </div>
         </div>
     );

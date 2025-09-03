@@ -20,6 +20,8 @@ export const SignupPage: React.FC = () => {
   const location = useLocation();
 
   const [formDetails, setFormDetails] = useState({
+    firstName: '',
+    lastName: '',
     username: '',
     email: '',
     password: '',
@@ -66,7 +68,7 @@ export const SignupPage: React.FC = () => {
     // Re-validate all fields on submit
     Object.entries(formDetails).forEach(([name, value]) => validateField(name, value as string));
     
-    const hasErrors = Object.values(errors).some(e => !!e) || Object.values(formDetails).some(v => !v);
+    const hasErrors = Object.values(errors).some(e => !!e) || !formDetails.firstName || !formDetails.lastName || !formDetails.username || !formDetails.email || !formDetails.password || !formDetails.referralCode;
 
     if (hasErrors) {
         setFormError(t('forms.errors.generic'));
@@ -112,11 +114,13 @@ export const SignupPage: React.FC = () => {
                             <div className="sm:col-span-2">
                                 <Input name="referralCode" placeholder={t('signupPage.details.referralCodePlaceholder')} value={formDetails.referralCode} onChange={handleChange} required className={inputClasses} error={errors.referralCode} />
                             </div>
-                            <Input name="username" placeholder={t('admin.userDetailModal.username')} value={formDetails.username} onChange={handleChange} required className={inputClasses} error={errors.username} />
-                            <Input name="email" type="email" placeholder={t('dashboard.settings.profile.email')} value={formDetails.email} onChange={handleChange} required className={inputClasses} error={errors.email} />
+                            <Input name="firstName" placeholder={t('signupPage.details.firstNamePlaceholder')} value={formDetails.firstName} onChange={handleChange} required className={inputClasses} error={errors.firstName} />
+                            <Input name="lastName" placeholder={t('signupPage.details.lastNamePlaceholder')} value={formDetails.lastName} onChange={handleChange} required className={inputClasses} error={errors.lastName} />
+                            <Input name="username" placeholder={t('signupPage.details.usernamePlaceholder')} value={formDetails.username} onChange={handleChange} required className={inputClasses} error={errors.username} />
+                            <Input name="email" type="email" placeholder={t('signupPage.details.emailPlaceholder')} value={formDetails.email} onChange={handleChange} required className={inputClasses} error={errors.email} />
                              <PasswordInput
                                 name="password"
-                                placeholder={t('dashboard.settings.password.new')}
+                                placeholder={t('signupPage.details.passwordPlaceholder')}
                                 value={formDetails.password}
                                 onChange={handleChange}
                                 required
@@ -126,7 +130,7 @@ export const SignupPage: React.FC = () => {
                             />
                             <PasswordInput
                                 name="confirmPassword"
-                                placeholder={t('dashboard.settings.password.confirm')}
+                                placeholder={t('signupPage.details.confirmPasswordPlaceholder')}
                                 value={formDetails.confirmPassword}
                                 onChange={handleChange}
                                 required

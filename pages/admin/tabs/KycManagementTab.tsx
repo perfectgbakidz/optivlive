@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import * as api from '../../../services/api';
@@ -21,7 +20,7 @@ export const KycManagementTab: React.FC = () => {
         setIsLoading(true);
         setError('');
         try {
-            const data = await api.mockFetchPendingKycRequests();
+            const data = await api.adminListKycRequests();
             setRequests(data);
         } catch (err: any) {
             setError(err.message || "Failed to load KYC requests.");
@@ -34,11 +33,11 @@ export const KycManagementTab: React.FC = () => {
         fetchRequests();
     }, []);
 
-    const handleApprove = async (userId: string) => {
-        setProcessingId(userId);
+    const handleApprove = async (id: string) => {
+        setProcessingId(id);
         try {
-            await api.mockProcessKyc(userId, 'approve');
-            setRequests(prev => prev.filter(req => req.userId !== userId));
+            await api.adminProcessKyc(id, { decision: 'approved' });
+            setRequests(prev => prev.filter(req => req.id !== id));
         } catch (err: any) {
             setError(err.message || `Failed to approve request.`);
         } finally {
@@ -48,13 +47,17 @@ export const KycManagementTab: React.FC = () => {
     
     const handleReject = async () => {
         if (!showRejectionModal) return;
-        setProcessingId(showRejectionModal.userId);
+        if (!rejectionReason.trim()) {
+            setError(t('admin.kyc.rejectionModal.emptyReasonError') || "Rejection reason cannot be empty.");
+            return;
+        }
+        setProcessingId(showRejectionModal.id);
         try {
-            await api.mockProcessKyc(showRejectionModal.userId, 'reject', rejectionReason);
-            setRequests(prev => prev.filter(req => req.userId !== showRejectionModal.userId));
+            await api.adminProcessKyc(showRejectionModal.id, { decision: 'rejected', rejection_reason: rejectionReason });
+            setRequests(prev => prev.filter(req => req.id !== showRejectionModal.id));
             closeRejectionModal();
         } catch (err: any) {
-             setError(err.message || `Failed to reject request.`);
+            setError(err.message || `Failed to reject request.`);
         } finally {
             setProcessingId(null);
         }
@@ -80,7 +83,7 @@ export const KycManagementTab: React.FC = () => {
                                 <div>
                                     <p className="font-semibold text-white">{req.userName}</p>
                                     <p className="text-sm text-brand-light-gray">{req.userEmail}</p>
-                                    <p className="text-xs text-brand-ui-element/80">{t('admin.kyc.submitted')} {req.dateSubmitted}</p>
+                                    <p className="text-xs text-brand-ui-element/80">{t('admin.kyc.submitted')} {new Date(req.dateSubmitted).toLocaleDateString()}</p>
                                 </div>
                                 <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
                                     <div>
@@ -93,15 +96,15 @@ export const KycManagementTab: React.FC = () => {
                                             size="sm" 
                                             variant="secondary" 
                                             className="bg-success/80 hover:bg-success"
-                                            onClick={() => handleApprove(req.userId)}
-                                            isLoading={processingId === req.userId}
+                                            onClick={() => handleApprove(req.id)}
+                                            isLoading={processingId === req.id}
                                             disabled={!!processingId}
                                         >{t('admin.withdrawals.approve')}</Button>
                                          <Button 
                                             size="sm" 
                                             variant="danger"
                                             onClick={() => setShowRejectionModal(req)}
-                                            isLoading={processingId === req.userId}
+                                            isLoading={processingId === req.id}
                                             disabled={!!processingId}
                                         >{t('admin.withdrawals.deny')}</Button>
                                     </div>
@@ -128,7 +131,7 @@ export const KycManagementTab: React.FC = () => {
                         />
                         <div className="flex justify-end gap-4">
                             <Button variant="outline" onClick={closeRejectionModal}>{t('admin.userDetailModal.cancel')}</Button>
-                            <Button variant="danger" onClick={handleReject} isLoading={processingId === showRejectionModal.userId}>{t('admin.kyc.rejectionModal.confirm')}</Button>
+                            <Button variant="danger" onClick={handleReject} isLoading={processingId === showRejectionModal.id}>{t('admin.kyc.rejectionModal.confirm')}</Button>
                         </div>
                     </div>
                 </Modal>

@@ -53,7 +53,9 @@
       "failed": "Fehlgeschlagen",
       "active": "Aktiv",
       "frozen": "Eingefroren",
-      "paused": "Pausiert"
+      "paused": "Pausiert",
+      "verified": "Verifiziert",
+      "unverified": "Nicht verifiziert"
     }
   },
   "forms": {
@@ -99,6 +101,12 @@
       "usernameAvailable": "Benutzername ist verfügbar!",
       "usernameTaken": "Benutzername ist bereits vergeben.",
       "referralCodePlaceholder": "Empfehlungscode",
+      "firstNamePlaceholder": "Vorname",
+      "lastNamePlaceholder": "Nachname",
+      "usernamePlaceholder": "Benutzername",
+      "emailPlaceholder": "E-Mail-Adresse",
+      "passwordPlaceholder": "Passwort",
+      "confirmPasswordPlaceholder": "Passwort bestätigen",
       "button": "Erstellen",
       "hasAccount": "Haben Sie bereits ein Konto? "
     },
@@ -421,8 +429,8 @@
     }
   },
   "testingBanner": {
-    "title": "Testmodus aktiv",
-    "description": "Diese Anwendung läuft in einer simulierten Umgebung. Alle Daten sind Mock-Daten.",
+    "title": "Live-Demo",
+    "description": "Dies ist eine Live-Demonstrationsumgebung. Sie können die folgenden Anmeldeinformationen zum Testen verwenden.",
     "userLogin": "Benutzer-Login:",
     "email": "E-Mail:",
     "pass": "Passwort:",
@@ -606,17 +614,19 @@
       "kycManagement": "KYC-Verwaltung",
       "withdrawals": "Auszahlungen",
       "transactions": "Transaktionen",
-      "role": "Administrator"
+      "role": "Administrator",
+      "settings": "Einstellungen"
     },
     "overview": {
       "title": "Admin-Dashboard",
       "masterDashboardTitle": "Master-Konto-Dashboard",
-      "totalRefEarnings": "Gesamte Empfehlungseinnahmen",
+      "myRefEarnings": "Meine Empfehlungseinnahmen",
       "balance": "Saldo",
       "withdrawalsCard": {
         "title": "Auszahlungsverwaltung",
         "subtitle": "Verwalten und ziehen Sie den Saldo des Master-Kontos ab.",
-        "link": "Gehe zu Auszahlungen →"
+        "withdraw_button": "Meinen Saldo abheben",
+        "manage_users_link": "Benutzerabhebungen verwalten →"
       },
       "platformControlsTitle": "Plattformsteuerung & Übersicht",
       "totalUserEarnings": "Gesamte Benutzer-Empfehlungseinnahmen",
@@ -635,6 +645,17 @@
         "title": "Globale Auszahlungssteuerung",
         "allUserWithdrawals": "Alle Benutzerabhebungen",
         "desc": "Dieser Schalter pausiert oder reaktiviert sofort die Auszahlungen für alle Benutzer auf der Plattform."
+      },
+      "metricsExplainedTitle": "Metriken erklärt",
+      "metrics": {
+          "myEarningsTitle": "Was sind 'Meine Empfehlungseinnahmen'?",
+          "myEarningsDesc": "Dies ist die Gesamtprovision, die direkt vom 'Master'-Administratorkonto durch seinen eigenen Empfehlungscode verdient wird.",
+          "myBalanceTitle": "Was ist 'Mein Saldo'?",
+          "myBalanceDesc": "Dies ist der aktuelle auszahlbare Saldo, der vom 'Master'-Administratorkonto selbst gehalten wird, getrennt von den Hauptprotokollmitteln.",
+          "totalUserEarningsTitle": "Was sind 'Gesamte Benutzer-Empfehlungseinnahmen'?",
+          "totalUserEarningsDesc": "Dies stellt die Gesamtsumme aller Provisionen dar, die vom Protokoll an jeden Benutzer im System ausgezahlt wurden.",
+          "protocolBalanceTitle": "Was ist der 'Protokollsaldo'?",
+          "protocolBalanceDesc": "Diese Zahl zeigt die Gesamtmittel, die vom Protokoll gehalten werden, nachdem alle Benutzerprovisionen abgezogen wurden. Es ist der primäre Pool von Mitteln, die für die administrative Auszahlung zur Verfügung stehen."
       }
     },
     "userManagement": {
@@ -670,7 +691,7 @@
       "lastName": "Nachname",
       "email": "E-Mail-Adresse",
       "username": "Benutzername",
-      "referrer": "Benutzername des Empfehlungsgebers (optional)",
+      "referrer": "Empfehlungscode",
       "password": "Passwort",
       "passwordNote": "Ein Standardpasswort wird bereitgestellt. Der Benutzer kann dies nach der Anmeldung ändern.",
       "button": "Benutzer erstellen"
@@ -698,6 +719,35 @@
         "reasonPlaceholder": "z. B. Dokument war verschwommen.",
         "confirm": "Ablehnung bestätigen"
       }
+    },
+    "settings": {
+        "title": "Admin-Einstellungen",
+        "password": {
+            "title": "Passwort ändern",
+            "current": "Aktuelles Passwort",
+            "new": "Neues Passwort",
+            "confirm": "Neues Passwort bestätigen",
+            "button": "Passwort ändern"
+        },
+        "pin": {
+            "changeButton": "PIN ändern",
+            "currentPassword": "Aktuelles Admin-Passwort",
+            "saveButton": "Neue PIN speichern"
+        },
+        "2fa": {
+            "title": "Zwei-Faktor-Authentifizierung (2FA)",
+            "description": "Erhöhen Sie die Sicherheit Ihres Kontos, indem Sie bei der Anmeldung einen zweiten Überprüfungsschritt verlangen.",
+            "enableModalTitle": "2FA aktivieren",
+            "disableModalTitle": "2FA deaktivieren",
+            "enableStep1": "1. Scannen Sie diesen QR-Code mit Ihrer Authenticator-App.",
+            "enableStep2": "Oder geben Sie diesen Schlüssel manuell ein:",
+            "enableStep3": "2. Geben Sie den 6-stelligen Code aus Ihrer App ein.",
+            "verificationCode": "Bestätigungscode",
+            "buttonVerifyEnable": "Überprüfen & Aktivieren",
+            "disablePrompt": "Zur Bestätigung geben Sie bitte einen 6-stelligen Code aus Ihrer Authenticator-App ein.",
+            "authCode": "Authentifizierungscode",
+            "buttonVerifyDisable": "Bestätigen & Deaktivieren"
+        }
     }
   }
 }

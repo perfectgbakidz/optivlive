@@ -57,13 +57,12 @@ export const HistoryTab: React.FC = () => {
                         <div className="md:hidden">
                             <div className="p-4 space-y-4">
                                 {transactions.map(tx => {
-                                    const amount = parseFloat(tx.amount);
+                                    const amount = tx.amount;
                                     return (
                                         <div key={tx.id} className="bg-brand-dark/30 p-4 rounded-lg border border-brand-ui-element/20">
                                             <div className="flex justify-between items-start mb-2">
                                                 <div>
-                                                    <p className="font-bold text-white capitalize">{tx.tx_type}</p>
-                                                    <p className="text-sm text-brand-light-gray">{tx.reference}</p>
+                                                    <p className="font-bold text-white capitalize">{tx.type.replace('_', ' ')}</p>
                                                 </div>
                                                 <p className={`font-mono text-lg shrink-0 ml-4 ${amount >= 0 ? 'text-success' : 'text-error'}`}>
                                                     {amount >= 0 ? '+' : ''}£{Math.abs(amount).toFixed(2)}
@@ -86,19 +85,17 @@ export const HistoryTab: React.FC = () => {
                                     <tr>
                                         <th className="p-4 font-semibold text-brand-white">{t('dashboard.history.date')}</th>
                                         <th className="p-4 font-semibold text-brand-white">{t('dashboard.history.type')}</th>
-                                        <th className="p-4 font-semibold text-brand-white">{t('dashboard.history.description')}</th>
                                         <th className="p-4 font-semibold text-right text-brand-white">{t('dashboard.history.amount')}</th>
                                         <th className="p-4 font-semibold text-center text-brand-white">{t('dashboard.history.status')}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {transactions.map(tx => {
-                                       const amount = parseFloat(tx.amount);
+                                       const amount = tx.amount;
                                        return(
                                         <tr key={tx.id} className="border-b border-brand-ui-element/20 last:border-0">
                                             <td className="p-4 whitespace-nowrap">{new Date(tx.created_at).toLocaleDateString()}</td>
-                                            <td className="p-4 capitalize">{tx.tx_type}</td>
-                                            <td className="p-4 text-brand-light-gray">{tx.reference}</td>
+                                            <td className="p-4 capitalize">{tx.type.replace('_', ' ')}</td>
                                             <td className={`p-4 font-mono text-right ${amount >= 0 ? 'text-success' : 'text-error'}`}>
                                                 {amount >= 0 ? '+' : ''}£{Math.abs(amount).toFixed(2)}
                                             </td>

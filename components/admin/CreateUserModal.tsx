@@ -20,7 +20,7 @@ export const CreateUserModal: React.FC<CreateUserModalProps> = ({ onClose, onUse
         email: '',
         username: '',
         password: 'password123', // Default password for simplicity
-        referrerUsername: ''
+        referralCode: ''
     });
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
@@ -34,8 +34,8 @@ export const CreateUserModal: React.FC<CreateUserModalProps> = ({ onClose, onUse
         setIsLoading(true);
         setError('');
         try {
-            const res = await api.mockAdminCreateUser(formData);
-            onUserCreated(res.user);
+            const res = await api.adminCreateUser(formData);
+            onUserCreated(res);
         } catch (err: any) {
             setError(err.message || "Failed to create user.");
         } finally {
@@ -57,7 +57,7 @@ export const CreateUserModal: React.FC<CreateUserModalProps> = ({ onClose, onUse
                 </div>
                 <Input name="email" label={t('admin.createUserModal.email')} type="email" value={formData.email} onChange={handleChange} required />
                 <Input name="username" label={t('admin.createUserModal.username')} value={formData.username} onChange={handleChange} required />
-                <Input name="referrerUsername" label={t('admin.createUserModal.referrer')} value={formData.referrerUsername} onChange={handleChange} />
+                <Input name="referralCode" label={t('admin.createUserModal.referrer')} value={formData.referralCode} onChange={handleChange} />
                 <Input name="password" label={t('admin.createUserModal.password')} type="password" value={formData.password} onChange={handleChange} required />
                 <p className="text-xs text-brand-ui-element">{t('admin.createUserModal.passwordNote')}</p>
 

@@ -28,21 +28,11 @@ const TreeNode: React.FC<{ node: TeamMember; level: number; }> = ({ node, level 
                 
                 {/* User Info */}
                 <div className="w-8 h-8 bg-gradient-to-tr from-brand-primary to-brand-secondary rounded-full flex items-center justify-center font-bold text-white text-sm flex-shrink-0">
-                    {node.name.charAt(0)}{node.name.split(' ').pop()?.charAt(0)}
+                    {node.username.charAt(0).toUpperCase()}
                 </div>
-                <div className="flex-grow grid grid-cols-1 sm:grid-cols-3 gap-4 items-center">
-                    <div>
-                        <p className="font-semibold text-white truncate">{node.name}</p>
-                        <p className="text-xs text-brand-light-gray">@{node.username}</p>
-                    </div>
-                    <div className="hidden sm:block">
-                        <p className="text-sm text-brand-light-gray">{t('dashboard.team.joined')}</p>
-                        <p className="font-mono text-xs text-white">{node.joinDate}</p>
-                    </div>
-                    <div className="text-right">
-                        <p className="text-sm text-brand-light-gray">{t('dashboard.team.earningsFrom')}</p>
-                        <p className="font-semibold text-brand-secondary">£{node.totalEarningsFrom.toFixed(2)}</p>
-                    </div>
+                <div className="flex-grow">
+                    <p className="font-semibold text-white truncate">{node.username}</p>
+                    <p className="text-xs text-brand-light-gray">{node.email}</p>
                 </div>
             </div>
             
@@ -71,8 +61,8 @@ export const TeamTab: React.FC = () => {
         setError('');
         try {
             const [teamData, statsData] = await Promise.all([
-                api.mockFetchTeamTree(),
-                api.mockFetchDashboardStats(),
+                api.getTeamTree(),
+                api.getDashboardStats(),
             ]);
             setTeam(teamData);
             setStats({

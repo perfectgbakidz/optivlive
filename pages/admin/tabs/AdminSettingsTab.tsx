@@ -18,45 +18,6 @@ const SettingsCard: React.FC<{title: string, children: React.ReactNode, footer?:
     </div>
 );
 
-const ProfileInfo: React.FC = () => {
-    const { user, updateUser } = useAuth();
-    const { t } = useTranslation();
-    const [firstName, setFirstName] = useState(user?.firstName || '');
-    const [lastName, setLastName] = useState(user?.lastName || '');
-    const [isLoading, setIsLoading] = useState(false);
-    const [message, setMessage] = useState('');
-    const [error, setError] = useState('');
-
-    const handleProfileUpdate = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setIsLoading(true);
-        setMessage('');
-        setError('');
-        try {
-            const updatedUser = await api.updateProfile({ firstName, lastName });
-            updateUser(updatedUser);
-            setMessage(t('dashboard.settings.profile.success'));
-        } catch (err: any) {
-            setError(err.message || 'Failed to update profile.');
-        } finally {
-            setIsLoading(false);
-        }
-    };
-    
-    return (
-         <form onSubmit={handleProfileUpdate} className="space-y-4">
-            {message && <div className="text-success p-2 rounded bg-success/10 border border-success">{message}</div>}
-            {error && <div className="text-error p-2 rounded bg-error/10 border border-error">{error}</div>}
-             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <Input label={t('dashboard.settings.profile.firstName')} value={firstName} onChange={e => setFirstName(e.target.value)} />
-                <Input label={t('dashboard.settings.profile.lastName')} value={lastName} onChange={e => setLastName(e.target.value)} />
-             </div>
-             <Input label={t('dashboard.settings.profile.email')} value={user?.email || ''} readOnly />
-             <Button type="submit" isLoading={isLoading} variant="secondary">{t('dashboard.settings.profile.button')}</Button>
-        </form>
-    )
-}
-
 const ChangePassword = () => {
     const { t } = useTranslation();
     const [passwords, setPasswords] = useState({ currentPassword: '', newPassword: '', confirmPassword: ''});
@@ -93,10 +54,10 @@ const ChangePassword = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
             {message && <div className="text-success p-2 rounded bg-success/10 border border-success">{message}</div>}
             {error && <div className="text-error p-2 rounded bg-error/10 border border-error">{error}</div>}
-            <Input label={t('dashboard.settings.password.current')} name="currentPassword" type="password" value={passwords.currentPassword} onChange={handleChange} required/>
-            <Input label={t('dashboard.settings.password.new')} name="newPassword" type="password" value={passwords.newPassword} onChange={handleChange} required/>
-            <Input label={t('dashboard.settings.password.confirm')} name="confirmPassword" type="password" value={passwords.confirmPassword} onChange={handleChange} required/>
-            <Button type="submit" isLoading={isLoading} variant="secondary">{t('dashboard.settings.password.button')}</Button>
+            <Input label={t('admin.settings.password.current')} name="currentPassword" type="password" value={passwords.currentPassword} onChange={handleChange} required/>
+            <Input label={t('admin.settings.password.new')} name="newPassword" type="password" value={passwords.newPassword} onChange={handleChange} required/>
+            <Input label={t('admin.settings.password.confirm')} name="confirmPassword" type="password" value={passwords.confirmPassword} onChange={handleChange} required/>
+            <Button type="submit" isLoading={isLoading} variant="secondary">{t('admin.settings.password.button')}</Button>
         </form>
     )
 }
@@ -104,18 +65,20 @@ const ChangePassword = () => {
 const ManagePin = () => {
     const { user, updateUser } = useAuth();
     const { t } = useTranslation();
-    const [pin, setPin] = useState({ new: '', confirm: ''});
+    const [pin, setPin] = useState({ new: '', confirm: '' });
+    const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
     const [message, setMessage] = useState('');
+    const [isChanging, setIsChanging] = useState(false);
 
-    const handlePinChange = (e: React.ChangeEvent<HTMLInputElement>) => setPin({...pin, [e.target.name]: e.target.value });
+    const handlePinInputChange = (e: React.ChangeEvent<HTMLInputElement>) => setPin({ ...pin, [e.target.name]: e.target.value });
 
     const handleSetPin = async (e: React.FormEvent) => {
         e.preventDefault();
-        if(pin.new.length < 4 || pin.new.length > 6) {
-             setError(t('dashboard.settings.pin.errorLength'));
-             return;
+        if (pin.new.length < 4 || pin.new.length > 6) {
+            setError(t('dashboard.settings.pin.errorLength'));
+            return;
         }
         if (pin.new !== pin.confirm) {
             setError(t('dashboard.settings.pin.errorMatch'));
@@ -128,28 +91,73 @@ const ManagePin = () => {
             const res = await api.setPin(pin.new);
             setMessage(res.detail);
             updateUser({ hasPin: true });
-            setPin({new: '', confirm: ''});
-        } catch(err: any) {
+            setPin({ new: '', confirm: '' });
+        } catch (err: any) {
             setError(err.message);
         } finally {
             setIsLoading(false);
         }
-    }
+    };
+
+    const handlePinChange = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (pin.new.length < 4 || pin.new.length > 6) {
+            setError(t('dashboard.settings.pin.errorLength'));
+            return;
+        }
+        if (pin.new !== pin.confirm) {
+            setError(t('dashboard.settings.pin.errorMatch'));
+            return;
+        }
+        setError('');
+        setMessage('');
+        setIsLoading(true);
+        try {
+            const res = await api.changePin({ currentPassword: password, newPin: pin.new });
+            setMessage(res.detail);
+            setPin({ new: '', confirm: '' });
+            setPassword('');
+            setIsChanging(false);
+        } catch (err: any) {
+            setError(err.message);
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     if (user?.hasPin) {
-        return <p className="text-brand-light-gray">{t('dashboard.settings.pin.isSet')}</p>
+        return (
+            <div className="space-y-4">
+                <p className="text-brand-light-gray">{t('dashboard.settings.pin.isSet')}</p>
+                <Button variant="secondary" onClick={() => { setIsChanging(!isChanging); setError(''); setMessage(''); }}>
+                    {isChanging ? t('admin.userDetailModal.cancel') : t('admin.settings.pin.changeButton')}
+                </Button>
+
+                {isChanging && (
+                    <form onSubmit={handlePinChange} className="space-y-4 pt-4 border-t border-brand-ui-element/30">
+                        {message && <div className="text-success p-2 rounded bg-success/10 border border-success text-sm">{message}</div>}
+                        {error && <div className="text-error p-2 rounded bg-error/10 border border-error text-sm">{error}</div>}
+                        <Input label={t('admin.settings.pin.currentPassword')} type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                        <Input label={t('dashboard.settings.pin.newPin')} name="new" type="password" maxLength={6} value={pin.new} onChange={handlePinInputChange} required />
+                        <Input label={t('dashboard.settings.pin.confirmPin')} name="confirm" type="password" maxLength={6} value={pin.confirm} onChange={handlePinInputChange} required />
+                        <Button type="submit" isLoading={isLoading}>{t('admin.settings.pin.saveButton')}</Button>
+                    </form>
+                )}
+            </div>
+        );
     }
 
     return (
         <form onSubmit={handleSetPin} className="space-y-4">
-             {message && <div className="text-success p-2 rounded bg-success/10 border border-success">{message}</div>}
-             {error && <div className="text-error p-2 rounded bg-error/10 border border-error">{error}</div>}
-            <Input label={t('dashboard.settings.pin.newPin')} name="new" type="password" maxLength={6} value={pin.new} onChange={handlePinChange} />
-            <Input label={t('dashboard.settings.pin.confirmPin')} name="confirm" type="password" maxLength={6} value={pin.confirm} onChange={handlePinChange} />
+            {message && <div className="text-success p-2 rounded bg-success/10 border border-success">{message}</div>}
+            {error && <div className="text-error p-2 rounded bg-error/10 border border-error">{error}</div>}
+            <Input label={t('dashboard.settings.pin.newPin')} name="new" type="password" maxLength={6} value={pin.new} onChange={handlePinInputChange} />
+            <Input label={t('dashboard.settings.pin.confirmPin')} name="confirm" type="password" maxLength={6} value={pin.confirm} onChange={handlePinInputChange} />
             <Button type="submit" isLoading={isLoading}>{t('dashboard.settings.pin.buttonSet')}</Button>
         </form>
-    )
-}
+    );
+};
+
 
 const Manage2FA = () => {
     const { user, updateUser } = useAuth();
@@ -232,15 +240,15 @@ const Manage2FA = () => {
             return (
                 <form onSubmit={handleVerifyAndEnable} className="space-y-4">
                     {error && <div className="text-error p-2 rounded bg-error/10 border border-error text-sm">{error}</div>}
-                    <p className="text-sm text-brand-light-gray">{t('dashboard.settings.2fa.enableStep1')}</p>
+                    <p className="text-sm text-brand-light-gray">{t('admin.settings.2fa.enableStep1')}</p>
                     <div className="bg-white p-2 rounded-lg inline-block mx-auto">
                         <img src={qrCodeUrl} alt="2FA QR Code" className="w-40 h-40"/>
                     </div>
-                    <p className="text-sm text-brand-light-gray">{t('dashboard.settings.2fa.enableStep2')}</p>
+                    <p className="text-sm text-brand-light-gray">{t('admin.settings.2fa.enableStep2')}</p>
                     <div className="bg-brand-dark p-2 rounded font-mono text-center text-brand-secondary break-all">{secret}</div>
-                    <p className="text-sm text-brand-light-gray pt-2">{t('dashboard.settings.2fa.enableStep3')}</p>
+                    <p className="text-sm text-brand-light-gray pt-2">{t('admin.settings.2fa.enableStep3')}</p>
                     <Input 
-                        label={t('dashboard.settings.2fa.verificationCode')}
+                        label={t('admin.settings.2fa.verificationCode')}
                         value={verificationCode}
                         onChange={e => setVerificationCode(e.target.value)}
                         placeholder="123456"
@@ -249,7 +257,7 @@ const Manage2FA = () => {
                     />
                     <div className="flex justify-end gap-2 pt-4 border-t border-brand-ui-element/20">
                         <Button type="button" variant="outline" onClick={closeModal} disabled={isLoading}>Cancel</Button>
-                        <Button type="submit" isLoading={isLoading}>{t('dashboard.settings.2fa.buttonVerifyEnable')}</Button>
+                        <Button type="submit" isLoading={isLoading}>{t('admin.settings.2fa.buttonVerifyEnable')}</Button>
                     </div>
                 </form>
             )
@@ -257,10 +265,10 @@ const Manage2FA = () => {
         if (modalContent === 'disable') {
             return (
                  <form onSubmit={handleVerifyAndDisable} className="space-y-4">
-                    <p>{t('dashboard.settings.2fa.disablePrompt')}</p>
+                    <p>{t('admin.settings.2fa.disablePrompt')}</p>
                     {error && <div className="text-error p-2 rounded bg-error/10 border border-error text-sm">{error}</div>}
                     <Input 
-                        label={t('dashboard.settings.2fa.authCode')}
+                        label={t('admin.settings.2fa.authCode')}
                         value={verificationCode}
                         onChange={e => setVerificationCode(e.target.value)}
                         placeholder="123456"
@@ -269,7 +277,7 @@ const Manage2FA = () => {
                     />
                      <div className="flex justify-end gap-2 pt-4 border-t border-brand-ui-element/20">
                         <Button type="button" variant="outline" onClick={closeModal} disabled={isLoading}>Cancel</Button>
-                        <Button type="submit" variant="danger" isLoading={isLoading}>{t('dashboard.settings.2fa.buttonVerifyDisable')}</Button>
+                        <Button type="submit" variant="danger" isLoading={isLoading}>{t('admin.settings.2fa.buttonVerifyDisable')}</Button>
                     </div>
                 </form>
             )
@@ -282,7 +290,7 @@ const Manage2FA = () => {
             <div className="space-y-4">
                 {message && <div className="text-success p-2 rounded bg-success/10 border border-success text-sm">{message}</div>}
                 <div className="flex items-center justify-between">
-                    <p className="text-brand-light-gray">{t('dashboard.settings.2fa.description')}</p>
+                    <p className="text-brand-light-gray">{t('admin.settings.2fa.description')}</p>
                     <button onClick={user?.is2faEnabled ? handleDisableClick : handleEnableClick} disabled={isLoading}>
                         <div className={`w-14 h-8 flex items-center rounded-full p-1 cursor-pointer transition-colors ${user?.is2faEnabled ? 'bg-success' : 'bg-brand-ui-element'}`}>
                             <div className={`bg-white w-6 h-6 rounded-full shadow-md transform transition-transform ${user?.is2faEnabled ? 'translate-x-6' : ''}`}></div>
@@ -292,7 +300,7 @@ const Manage2FA = () => {
                 {error && !isModalOpen && <p className="text-sm text-error">{error}</p>}
             </div>
             
-            <Modal isOpen={isModalOpen} onClose={closeModal} title={t(modalContent === 'enable' ? 'dashboard.settings.2fa.enableModalTitle' : 'dashboard.settings.2fa.disableModalTitle')}>
+            <Modal isOpen={isModalOpen} onClose={closeModal} title={t(modalContent === 'enable' ? 'admin.settings.2fa.enableModalTitle' : 'admin.settings.2fa.disableModalTitle')}>
                 {renderModalContent()}
             </Modal>
         </>
@@ -300,22 +308,17 @@ const Manage2FA = () => {
 };
 
 
-export const SettingsTab: React.FC = () => {
+export const AdminSettingsTab: React.FC = () => {
     const { t } = useTranslation();
     return (
         <div className="space-y-8">
-            <h1 className="text-3xl font-bold text-white">{t('dashboard.settings.title')}</h1>
+            <h1 className="text-3xl font-bold text-white">{t('admin.settings.title')}</h1>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-                <div className="space-y-8">
-                    <SettingsCard title={t('dashboard.settings.profile.title')}><ProfileInfo /></SettingsCard>
-                    <SettingsCard title={t('dashboard.settings.password.title')}><ChangePassword /></SettingsCard>
-                </div>
-                <div className="space-y-8">
-                    <SettingsCard title={t('dashboard.settings.pin.title')}><ManagePin /></SettingsCard>
-                    <SettingsCard title={t('dashboard.settings.2fa.title')}>
-                        <Manage2FA />
-                    </SettingsCard>
-                </div>
+                <SettingsCard title={t('admin.settings.password.title')}><ChangePassword /></SettingsCard>
+                <SettingsCard title={t('admin.settings.2fa.title')}>
+                    <Manage2FA />
+                </SettingsCard>
+                 <SettingsCard title={t('dashboard.settings.pin.title')}><ManagePin /></SettingsCard>
             </div>
         </div>
     );

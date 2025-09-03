@@ -1,5 +1,6 @@
 
-import React, { createContext, useState, useEffect } from 'react';
+
+import React, { createContext, useState, useEffect, useCallback } from 'react';
 import { User, AuthContextType } from '../types';
 import * as api from '../services/api';
 
@@ -13,7 +14,7 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({ children }
   const [tempUserId, setTempUserId] = useState<string | null>(null);
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
 
-  const handleSuccessfulLogin = async (accessToken: string, refreshToken: string) => {
+  const handleSuccessfulLogin = async (accessToken: string, refreshToken: string): Promise<User> => {
     localStorage.setItem('accessToken', accessToken);
     localStorage.setItem('refreshToken', refreshToken);
 
@@ -23,6 +24,7 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({ children }
     setIsAdmin(userData.role === 'admin');
     setIsAwaiting2FA(false);
     setTempUserId(null);
+    return userData;
   };
 
   useEffect(() => {
@@ -66,18 +68,22 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({ children }
   
   const adminLogin = async (email: string, pass: string) => {
     setIsLoading(true);
+    setIsAwaiting2FA(false);
     try {
-        // The backend doc implies a single login endpoint. We assume the backend
-        // handles role detection. If login is successful, getProfile will determine the role.
         const response = await api.login(email, pass);
-        if ('access' in response) {
-            await handleSuccessfulLogin(response.access, response.refresh);
-        } else {
-            // Admin accounts should not have 2FA according to this flow,
-            // but if they did, it would need to be handled.
-            throw new Error("Admin login failed or requires 2FA, which is not supported in this flow.");
+        if ('two_factor_required' in response && response.two_factor_required) {
+            setIsAwaiting2FA(true);
+            setTempUserId(response.user_id);
+            return { twoFactorRequired: true, userId: response.user_id };
+        } else if ('access' in response) {
+            const loggedInUser = await handleSuccessfulLogin(response.access, response.refresh);
+            if (loggedInUser.role !== 'admin') {
+                logout();
+                throw new Error("Access denied. User is not an administrator.");
+            }
         }
     } catch(error) {
+        logout();
         console.error(error);
         throw error;
     } finally {
@@ -85,11 +91,12 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({ children }
     }
   }
 
-  const verifyTwoFactor = async (userId: string, token: string) => {
+  const verifyTwoFactor = async (userId: string, token: string): Promise<User> => {
       setIsLoading(true);
       try {
           const response = await api.verifyTwoFactor(userId, token);
-          await handleSuccessfulLogin(response.access, response.refresh);
+          const loggedInUser = await handleSuccessfulLogin(response.access, response.refresh);
+          return loggedInUser;
       } catch (error) {
           console.error(error);
           throw error;
@@ -124,14 +131,14 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({ children }
     setIsAdmin(false);
   };
   
-  const updateUser = (newUser: Partial<User>) => {
+  const updateUser = useCallback((newUser: Partial<User>) => {
     setUser(prevUser => {
       if (prevUser) {
         return { ...prevUser, ...newUser };
       }
       return prevUser;
     });
-  };
+  }, []);
 
   const value: AuthContextType = {
     isAuthenticated,

@@ -27,7 +27,7 @@ export const Footer: React.FC = () => {
            <div className="mt-6">
                 <p className="text-lg font-semibold text-brand-light-gray/90">{t('footer.follow_us')}</p>
                 <div className="flex flex-wrap justify-center items-center gap-6 mt-4">
-                    <SocialIcon href="https://x.com/OptivusProtocol?t=t15w-GFwUR-Dyo4JVoChuQ&s=09" aria-label="Follow on X">
+                    <SocialIcon href="https://x.com/Web3OPTiVision?t=t15w-GFwUR-Dyo4JVoChuQ&s=09" aria-label="Follow on X">
                         <svg className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
                     </SocialIcon>
                     <SocialIcon href="https://www.youtube.com/@OptivusProtocol" aria-label="Watch on YouTube">

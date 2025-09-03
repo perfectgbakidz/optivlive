@@ -30,7 +30,7 @@
       "feature2_title": "Indique com o Optivus. Ganhe sem limites.",
       "feature2_desc": "O Protocolo Optivus transforma sua rede em um motor de crescimento com indicações inteligentes alimentadas por blockchain. Compartilhe. Ganhe. Expanda – sem esforço e com transparência, com recompensas em que você pode confiar.",
       "feature3_title": "Faça stake de $OPTIV. Cresça com propósito.",
-      "feature3_desc": "O Protocolo Optivus capacita seu futuro financeiro com uma infraestrutura Web3 segura и escalável. Ganhe recompensas enquanto apoia a inovação de blockchain de última geração – rápido, confiável e construído para durar."
+      "feature3_desc": "O Protocolo Optivus capacita seu futuro financeiro com uma infraestrutura Web3 segura e escalável. Ganhe recompensas enquanto apoia a inovação de blockchain de última geração – rápido, confiável e construído para durar."
     }
   },
   "footer": {
@@ -53,7 +53,9 @@
       "failed": "Falhou",
       "active": "Ativo",
       "frozen": "Congelado",
-      "paused": "Pausado"
+      "paused": "Pausado",
+      "verified": "Verificado",
+      "unverified": "Não Verificado"
     }
   },
   "forms": {
@@ -99,6 +101,12 @@
       "usernameAvailable": "Nome de usuário disponível!",
       "usernameTaken": "Nome de usuário já está em uso.",
       "referralCodePlaceholder": "Código de Referência",
+      "firstNamePlaceholder": "Nome",
+      "lastNamePlaceholder": "Sobrenome",
+      "usernamePlaceholder": "Nome de usuário",
+      "emailPlaceholder": "Endereço de e-mail",
+      "passwordPlaceholder": "Senha",
+      "confirmPasswordPlaceholder": "Confirmar senha",
       "button": "Criar",
       "hasAccount": "Já tem uma conta? "
     },
@@ -264,7 +272,7 @@
       "sovText": "Ao contrário de tokens voláteis baseados em hype, o OPTIV foi projetado para ser mantido:",
       "sovPoints": [
         "Fornecimento máximo fixo: 10 bilhões de OPTIV – sem inflação.",
-        "Potencial deflacionário: queimável por meio de transações, taxas или acionado pela governança.",
+        "Potencial deflacionário: queimável por meio de transações, taxas ou acionado pela governança.",
         "Pronto para staking: mecânicas de rendimento opcionais por meio do pool existente, não inflação."
       ],
       "sovConclusion": "Este modelo suporta a confiança a longo prazo e minimiza a volatilidade dos preços.",
@@ -395,7 +403,7 @@
       },
       {
         "title": "Regras do programa e obrigações do participante",
-        "content": ["Este Programa é uma campanha promocional — não uma oportunidade de renda ou programa de investimento. Os participantes devem concordar com o seguinte:", "A criação de várias contas, o envolvimento em fraudes ou o abuso do sistema de indicação resultarão em desqualificação imediata.", "Os links de indicação не devem ser distribuídos por meio de spam, promoções enganosas ou em violação dos Termos de Uso da Optivus.", "Os participantes não podem apresentar o Programa como uma fonte de renda garantida ou oportunidade de investimento.", "Os bônus de indicação não dependem do volume de indicações downstream além do sexto nível.", "Todas as atividades promocionais devem cumprir as leis locais, estaduais e internacionais."]
+        "content": ["Este Programa é uma campanha promocional — não uma oportunidade de renda ou programa de investimento. Os participantes devem concordar com o seguinte:", "A criação de várias contas, o envolvimento em fraudes ou o abuso do sistema de indicação resultarão em desqualificação imediata.", "Os links de indicação não devem ser distribuídos por meio de spam, promoções enganosas ou em violação dos Termos de Uso da Optivus.", "Os participantes não podem apresentar o Programa como uma fonte de renda garantida ou oportunidade de investimento.", "Os bônus de indicação não dependem do volume de indicações downstream além do sexto nível.", "Todas as atividades promocionais devem cumprir as leis locais, estaduais e internacionais."]
       },
       {
         "title": "Aviso legal e de conformidade",
@@ -571,7 +579,7 @@
         "emailCode": "Código de verificação de e-mail",
         "buttonConfirm": "Confirmar e definir PIN",
         "errorLength": "O PIN deve ter entre 4 e 6 dígitos.",
-        "errorMatch": "Os PINs не correspondem."
+        "errorMatch": "Os PINs não correspondem."
       },
       "2fa": {
         "title": "Autenticação de dois fatores (2FA)",
@@ -606,17 +614,19 @@
       "kycManagement": "Gerenciamento de KYC",
       "withdrawals": "Saques",
       "transactions": "Transações",
-      "role": "Administrador"
+      "role": "Administrador",
+      "settings": "Configurações"
     },
     "overview": {
       "title": "Painel do administrador",
       "masterDashboardTitle": "Painel da conta mestre",
-      "totalRefEarnings": "Ganhos totais de indicação",
+      "myRefEarnings": "Meus ganhos de indicação",
       "balance": "Saldo",
       "withdrawalsCard": {
         "title": "Gerenciamento de saques",
         "subtitle": "Gerencie e saque o saldo da conta mestre.",
-        "link": "Ir para saques →"
+        "withdraw_button": "Sacar meu saldo",
+        "manage_users_link": "Gerenciar saques de usuários →"
       },
       "platformControlsTitle": "Controles e visão geral da plataforma",
       "totalUserEarnings": "Ganhos totais de indicação do usuário",
@@ -635,6 +645,17 @@
         "title": "Controles globais de saque",
         "allUserWithdrawals": "Todos os saques de usuários",
         "desc": "Este interruptor pausa ou retoma imediatamente os saques para todos os usuários na plataforma."
+      },
+      "metricsExplainedTitle": "Explicação das métricas",
+      "metrics": {
+        "myEarningsTitle": "O que são 'Meus ganhos de indicação'?",
+        "myEarningsDesc": "Esta é a comissão total ganha diretamente pela conta de administrador 'mestre' por meio de seu próprio código de indicação.",
+        "myBalanceTitle": "O que é 'Meu saldo'?",
+        "myBalanceDesc": "Este é o saldo sacável atual mantido pela própria conta de administrador 'mestre', separado dos fundos principais do protocolo.",
+        "totalUserEarningsTitle": "O que são 'Ganhos totais de indicação do usuário'?",
+        "totalUserEarningsDesc": "Isso representa o total geral de todas as comissões que foram pagas do protocolo para cada usuário no sistema.",
+        "protocolBalanceTitle": "O que é o 'Saldo do protocolo'?",
+        "protocolBalanceDesc": "Este número mostra o total de fundos mantidos pelo protocolo após a dedução de todas as comissões dos usuários. É o principal pool de fundos disponível para saque administrativo."
       }
     },
     "userManagement": {
@@ -670,7 +691,7 @@
       "lastName": "Sobrenome",
       "email": "Endereço de e-mail",
       "username": "Nome de usuário",
-      "referrer": "Nome de usuário do indicador (opcional)",
+      "referrer": "Código do indicador",
       "password": "Senha",
       "passwordNote": "Uma senha padrão é fornecida. O usuário pode alterá-la após o login.",
       "button": "Criar usuário"
@@ -697,6 +718,35 @@
         "reasonLabel": "Motivo da rejeição (opcional)",
         "reasonPlaceholder": "por exemplo, o documento estava borrado.",
         "confirm": "Confirmar rejeição"
+      }
+    },
+    "settings": {
+      "title": "Configurações de administrador",
+      "password": {
+        "title": "Alterar senha",
+        "current": "Senha atual",
+        "new": "Nova senha",
+        "confirm": "Confirmar nova senha",
+        "button": "Alterar senha"
+      },
+      "pin": {
+        "changeButton": "Alterar PIN",
+        "currentPassword": "Senha de administrador atual",
+        "saveButton": "Salvar novo PIN"
+      },
+      "2fa": {
+        "title": "Autenticação de dois fatores (2FA)",
+        "description": "Aumente a segurança da sua conta exigindo uma segunda etapa de verificação no login.",
+        "enableModalTitle": "Ativar 2FA",
+        "disableModalTitle": "Desativar 2FA",
+        "enableStep1": "1. Escaneie este código QR com seu aplicativo autenticador.",
+        "enableStep2": "Ou digite esta chave manualmente:",
+        "enableStep3": "2. Digite o código de 6 dígitos do seu aplicativo.",
+        "verificationCode": "Código de verificação",
+        "buttonVerifyEnable": "Verificar e ativar",
+        "disablePrompt": "Para confirmar, digite um código de 6 dígitos do seu aplicativo autenticador.",
+        "authCode": "Código de autenticação",
+        "buttonVerifyDisable": "Confirmar e desativar"
       }
     }
   }

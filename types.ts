@@ -1,4 +1,3 @@
-
 // --- API & Base Types ---
 
 export interface JWTTokenResponse {
@@ -11,6 +10,11 @@ export interface TwoFactorRequiredResponse {
     user_id: string;
 }
 
+export interface Generate2FAResponse {
+    secret_key: string;
+    qr_code_url: string;
+}
+
 // --- User Types ---
 
 export interface User {
@@ -20,14 +24,14 @@ export interface User {
   referral_code: string;
   is_kyc_verified: boolean;
   // --- Fields assumed to exist for UI functionality ---
-  firstName?: string; // Not in docs, but used in UI. Assumed part of profile.
-  lastName?: string; // Not in docs, but used in UI. Assumed part of profile.
-  balance?: string; // Not in docs, but critical for UI. Assumed part of profile.
-  hasPin?: boolean; // Not in docs, but state needed for UI.
-  is2faEnabled?: boolean; // Not in docs, but state needed for UI.
-  role?: 'user' | 'admin'; // Not in docs, but needed for UI routing.
-  status?: 'active' | 'frozen'; // Not in docs, needed for admin UI.
-  withdrawalStatus?: 'active' | 'paused'; // Not in docs, needed for admin UI.
+  firstName?: string;
+  lastName?: string;
+  balance?: string;
+  hasPin?: boolean;
+  is2faEnabled?: boolean;
+  role?: 'user' | 'admin';
+  status?: 'active' | 'frozen';
+  withdrawalStatus?: 'active' | 'paused';
 }
 
 export interface AuthContextType {
@@ -35,8 +39,8 @@ export interface AuthContextType {
   user: User | null;
   isLoading: boolean;
   login: (email: string, pass: string) => Promise<{ twoFactorRequired: boolean, userId?: string } | void>;
-  adminLogin: (email: string, pass: string) => Promise<void>;
-  verifyTwoFactor: (userId: string, token: string) => Promise<void>;
+  adminLogin: (email: string, pass: string) => Promise<{ twoFactorRequired: boolean, userId?: string } | void>;
+  verifyTwoFactor: (userId: string, token: string) => Promise<User>;
   isAwaiting2FA: boolean;
   isAdmin: boolean;
   logout: () => void;
@@ -59,44 +63,34 @@ export interface DownlineLevel {
 }
 
 export interface Transaction {
-  id: string;
+  id: number;
+  user_id: number;
   created_at: string;
-  tx_type: 'deposit' | 'withdrawal' | 'commission' | 'bonus' | 'fee' | 'adjustment' | 'reversal';
-  reference: string;
-  amount: string; // Monetary values are strings from the backend
+  type: string;
+  amount: number;
   status: 'completed' | 'pending' | 'failed';
-  user?: { // For admin view
+  user?: { 
     name: string;
     email: string;
   };
 }
 
 export interface TeamMember {
-  id: string;
-  name: string;
+  id: number;
   username: string;
-  level: number;
-  joinDate: string;
-  totalEarningsFrom: number;
+  email: string;
+  referral_code: string;
   children: TeamMember[];
 }
-
 
 // --- KYC Types ---
 
 export interface KycStatusResponse {
     status: 'unverified' | 'pending' | 'approved' | 'rejected';
     rejection_reason: string | null;
-}
-
-// --- Admin Types ---
-
-export interface AdminStats {
-    totalUsers: number;
-    totalUserReferralEarnings: number;
-// Note: pendingWithdrawalsCount and protocolBalance are not in the docs but are used in the UI.
-    pendingWithdrawalsCount: number;
-    protocolBalance: number;
+    user_id?: number;
+    submitted_at?: string | null;
+    reviewed_at?: string | null;
 }
 
 export interface KycRequest {
@@ -105,13 +99,25 @@ export interface KycRequest {
     userName: string;
     userEmail: string;
     dateSubmitted: string;
-    // These fields are from the old mock data, not the backend docs.
-    // The backend only specifies document files. This may need reconciliation.
-    address: string;
-    city: string;
-    postalCode: string;
-    country: string;
-    documentUrl: string; // The backend docs mention files, not a URL. This likely needs to be a link to view the file.
+    // Backend review fields
+    decision?: 'approved' | 'rejected';
+    rejection_reason?: string | null;
+    // If backend provides documents as URLs or file keys
+    documentUrl?: string;
+    address?: string;
+    city?: string;
+    postalCode?: string;
+    country?: string;
+}
+
+// --- Admin Types ---
+
+export interface AdminStats {
+    totalUsers: number;
+    totalUserReferralEarnings: number;
+    adminReferralEarnings: number;
+    pendingWithdrawalsCount: number;
+    protocolBalance: number;
 }
 
 export interface WithdrawalRequest {
@@ -119,10 +125,9 @@ export interface WithdrawalRequest {
     userId: string;
     userName: string;
     userEmail: string;
-    amount: string; // Monetary values are strings
+    amount: string;
     date: string;
     status: 'pending' | 'approved' | 'rejected' | 'paid';
-    // The following are part of the GET response, not the POST request.
     bank_name: string;
     account_number: string;
     account_name: string;

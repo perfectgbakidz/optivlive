@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../../hooks/useAuth';
@@ -6,6 +7,7 @@ import * as api from '../../../services/api';
 import { Button } from '../../../components/ui/Button';
 import { Input } from '../../../components/ui/Input';
 import { KycStatusResponse } from '../../../types';
+import { Spinner } from '../../../components/ui/Spinner';
 
 const StatusDisplay: React.FC<{status: 'approved' | 'pending' | 'rejected', message: string, title: string, icon: React.ReactNode, reason?: string | null}> = ({status, message, title, icon, reason}) => (
     <div className="flex flex-col items-center justify-center text-center p-8 bg-brand-panel backdrop-blur-lg border border-brand-ui-element/20 rounded-lg">
@@ -32,6 +34,10 @@ export const KycTab: React.FC = () => {
     const [message, setMessage] = useState('');
 
     // Form state
+    const [address, setAddress] = useState('');
+    const [city, setCity] = useState('');
+    const [postalCode, setPostalCode] = useState('');
+    const [country, setCountry] = useState('');
     const [documentType, setDocumentType] = useState('passport');
     const [documentFront, setDocumentFront] = useState<File | null>(null);
     const [documentBack, setDocumentBack] = useState<File | null>(null);
@@ -59,14 +65,18 @@ export const KycTab: React.FC = () => {
         setError('');
         setMessage('');
 
-        if (!documentFront || !selfie || (documentType !== 'passport' && !documentBack)) {
-            setError('Please upload all required documents.');
+        if (!address || !city || !postalCode || !country || !documentFront || !selfie || (documentType !== 'passport' && !documentBack)) {
+            setError('Please fill out all fields and upload all required documents.');
             return;
         }
 
         setIsLoading(true);
         try {
             const formData = new FormData();
+            formData.append('address', address);
+            formData.append('city', city);
+            formData.append('postal_code', postalCode);
+            formData.append('country', country);
             formData.append('document_type', documentType);
             formData.append('document_front', documentFront);
             formData.append('selfie', selfie);
@@ -84,8 +94,8 @@ export const KycTab: React.FC = () => {
         }
     };
     
-    if (isLoading) return <div>Loading...</div>
-    if (error && !kycStatus) return <div>Error: {error}</div>
+    if (isLoading) return <Spinner />;
+    if (error && !kycStatus) return <div className="text-error text-center p-4">{error}</div>;
 
     if (kycStatus?.status === 'pending') {
         return <StatusDisplay 
@@ -121,7 +131,20 @@ export const KycTab: React.FC = () => {
                 {message && <div className="text-success p-3 rounded bg-success/10 border border-success">{message}</div>}
                 {error && <div className="text-error p-3 rounded bg-error/10 border border-error">{error}</div>}
 
-                 <div>
+                <div>
+                    <h2 className="text-xl font-semibold text-white">{t('dashboard.kyc.form.addressInfo')}</h2>
+                    <p className="text-sm text-brand-light-gray mt-1">{t('dashboard.kyc.form.addressInstruction', 'Please provide your full residential address as it appears on your documents.')}</p>
+                    <div className="mt-4 space-y-4">
+                        <Input label={t('dashboard.kyc.form.streetAddress')} value={address} onChange={e => setAddress(e.target.value)} required />
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <Input label={t('dashboard.kyc.form.city')} value={city} onChange={e => setCity(e.target.value)} required />
+                            <Input label={t('dashboard.kyc.form.postalCode')} value={postalCode} onChange={e => setPostalCode(e.target.value)} required />
+                        </div>
+                        <Input label={t('dashboard.kyc.form.country')} value={country} onChange={e => setCountry(e.target.value)} required />
+                    </div>
+                </div>
+
+                 <div className="border-t border-brand-ui-element/20 pt-6">
                     <h2 className="text-xl font-semibold text-white">{t('dashboard.kyc.form.docUpload')}</h2>
                     <p className="text-sm text-brand-light-gray mt-1">{t('dashboard.kyc.form.docInstruction')}</p>
 

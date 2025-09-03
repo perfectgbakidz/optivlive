@@ -53,7 +53,9 @@
       "failed": "실패함",
       "active": "활성",
       "frozen": "동결됨",
-      "paused": "일시 중지됨"
+      "paused": "일시 중지됨",
+      "verified": "인증됨",
+      "unverified": "미인증"
     }
   },
   "forms": {
@@ -99,6 +101,12 @@
       "usernameAvailable": "사용자 이름을 사용할 수 있습니다!",
       "usernameTaken": "사용자 이름이 이미 사용 중입니다.",
       "referralCodePlaceholder": "추천 코드",
+      "firstNamePlaceholder": "이름",
+      "lastNamePlaceholder": "성",
+      "usernamePlaceholder": "사용자 이름",
+      "emailPlaceholder": "이메일 주소",
+      "passwordPlaceholder": "비밀번호",
+      "confirmPasswordPlaceholder": "비밀번호 확인",
       "button": "만들기",
       "hasAccount": "이미 계정이 있으신가요? "
     },
@@ -523,15 +531,15 @@
         "rejected": {
             "title": "제출 거부됨",
             "reason": "사유: {{reason}}",
-            "noReason": "사유: 사유 없음.",
-            "instruction": "문제를 수정하고 아래 정보를 다시 제출하세요."
+            "noReason": "사유: 사유가 제공되지 않았습니다.",
+            "instruction": "문제를 수정하고 아래에 정보를 다시 제출하세요."
         },
         "form": {
             "personalInfo": "개인 정보",
             "firstName": "이름",
             "lastName": "성",
             "addressInfo": "주소 정보",
-            "streetAddress": "도로명 주소",
+            "streetAddress": "주소",
             "city": "도시",
             "postalCode": "우편번호",
             "country": "국가",
@@ -539,7 +547,7 @@
             "docInstruction": "여권 또는 운전면허증의 선명한 이미지를 업로드하세요.",
             "payoutMethod": "지급 방법 설정",
             "payoutConnected": "Stripe 계정이 성공적으로 연결되었습니다.",
-            "payoutInstruction": "지급금을 받으려면 Stripe 계정을 연결하세요.",
+            "payoutInstruction": "지급을 받으려면 Stripe 계정을 연결하세요.",
             "payoutButton": "Stripe와 연결",
             "submitButton": "인증을 위해 제출",
             "resubmitButton": "인증을 위해 다시 제출"
@@ -552,7 +560,7 @@
             "firstName": "이름",
             "lastName": "성",
             "email": "이메일 주소",
-            "button": "변경 사항 저장",
+            "button": "변경사항 저장",
             "success": "프로필이 성공적으로 업데이트되었습니다!"
         },
         "password": {
@@ -570,7 +578,7 @@
             "buttonSet": "PIN 설정",
             "emailCode": "이메일 인증 코드",
             "buttonConfirm": "확인 및 PIN 설정",
-            "errorLength": "PIN은 4자리에서 6자리 사이여야 합니다.",
+            "errorLength": "PIN은 4~6자리여야 합니다.",
             "errorMatch": "PIN이 일치하지 않습니다."
         },
         "2fa": {
@@ -582,7 +590,7 @@
             "enableStep2": "또는 이 키를 수동으로 입력하세요:",
             "enableStep3": "2. 앱에서 6자리 코드를 입력하세요.",
             "verificationCode": "인증 코드",
-            "buttonVerifyEnable": "확인 및 활성화",
+            "buttonVerifyEnable": "인증 및 활성화",
             "disablePrompt": "확인하려면 인증 앱에서 6자리 코드를 입력하세요.",
             "authCode": "인증 코드",
             "buttonVerifyDisable": "확인 및 비활성화"
@@ -592,112 +600,154 @@
   "admin": {
     "title": "관리자: {{tab}}",
     "loginPage": {
-        "title": "관리자 포털",
-        "subtitle": "계속하려면 로그인하세요.",
-        "emailPlaceholder": "관리자 이메일",
-        "passwordPlaceholder": "관리자 비밀번호",
-        "button": "로그인",
-        "return": "사용자 로그인으로 돌아가기",
-        "footer": "© 옵티버스 프로토콜. 관리자 액세스."
+      "title": "관리자 포털",
+      "subtitle": "계속하려면 로그인하세요.",
+      "emailPlaceholder": "관리자 이메일",
+      "passwordPlaceholder": "관리자 비밀번호",
+      "button": "로그인",
+      "return": "사용자 로그인으로 돌아가기",
+      "footer": "© 옵티버스 프로토콜. 관리자 액세스."
     },
     "sidebar": {
-        "overview": "개요",
-        "userManagement": "사용자 관리",
-        "kycManagement": "KYC 관리",
-        "withdrawals": "인출",
-        "transactions": "거래",
-        "role": "관리자"
+      "overview": "개요",
+      "userManagement": "사용자 관리",
+      "kycManagement": "KYC 관리",
+      "withdrawals": "인출",
+      "transactions": "거래",
+      "role": "관리자",
+      "settings": "설정"
     },
     "overview": {
-        "title": "관리자 대시보드",
-        "masterDashboardTitle": "마스터 계정 대시보드",
-        "totalRefEarnings": "총 추천 수입",
-        "balance": "잔액",
-        "withdrawalsCard": {
-            "title": "인출 관리",
-            "subtitle": "마스터 계정의 잔액을 관리하고 인출합니다.",
-            "link": "인출로 이동 →"
-        },
-        "platformControlsTitle": "플랫폼 제어 및 개요",
-        "totalUserEarnings": "총 사용자 추천 수입",
-        "totalUserEarningsDesc": "모든 사용자에게 분배된 커미션 및 보너스의 누적 금액입니다.",
-        "protocolBalance": "남은 프로토콜 잔액",
-        "protocolBalanceDesc": "프로토콜 관리자가 인출할 수 있는 수수료에서 남은 잔액입니다.",
-        "totalUsers": "총 사용자",
-        "pendingWithdrawals": "대기 중인 인출",
-        "masterAccountCard": {
-            "title": "마스터 계정",
-            "desc": "이것은 모든 추천 체인이 시작되는 사전 제작된 계정입니다.",
-            "username": "사용자 이름:",
-            "refCode": "참조 코드:"
-        },
-        "globalWithdrawalsCard": {
-            "title": "글로벌 인출 제어",
-            "allUserWithdrawals": "모든 사용자 인출",
-            "desc": "이 스위치는 플랫폼의 모든 사용자에 대해 인출을 즉시 일시 중지하거나 재개합니다."
-        }
+      "title": "관리자 대시보드",
+      "masterDashboardTitle": "마스터 계정 대시보드",
+      "myRefEarnings": "내 추천 수입",
+      "balance": "잔액",
+      "withdrawalsCard": {
+        "title": "인출 관리",
+        "subtitle": "마스터 계정의 잔액을 관리하고 인출합니다.",
+        "withdraw_button": "내 잔액 인출",
+        "manage_users_link": "사용자 인출 관리 →"
+      },
+      "platformControlsTitle": "플랫폼 제어 및 개요",
+      "totalUserEarnings": "총 사용자 추천 수입",
+      "totalUserEarningsDesc": "모든 사용자에게 분배된 커미션 및 보너스의 누적 금액입니다.",
+      "protocolBalance": "남은 프로토콜 잔액",
+      "protocolBalanceDesc": "프로토콜 관리자가 인출할 수 있는 수수료의 남은 잔액입니다.",
+      "totalUsers": "총 사용자",
+      "pendingWithdrawals": "대기 중인 인출",
+      "masterAccountCard": {
+        "title": "마스터 계정",
+        "desc": "모든 추천 체인이 시작되는 미리 만들어진 계정입니다.",
+        "username": "사용자 이름:",
+        "refCode": "추천 코드:"
+      },
+      "globalWithdrawalsCard": {
+        "title": "전역 인출 제어",
+        "allUserWithdrawals": "모든 사용자 인출",
+        "desc": "이 스위치는 플랫폼의 모든 사용자에 대한 인출을 즉시 일시 중지하거나 재개합니다."
+      },
+      "metricsExplainedTitle": "메트릭 설명",
+      "metrics": {
+        "myEarningsTitle": "'내 추천 수입'이란 무엇인가요?",
+        "myEarningsDesc": "이는 '마스터' 관리자 계정이 자체 추천 코드를 통해 직접 얻은 총 커미션입니다.",
+        "myBalanceTitle": "'내 잔액'이란 무엇인가요?",
+        "myBalanceDesc": "이는 주 프로토콜 자금과 별도로 '마스터' 관리자 계정 자체가 보유한 현재 인출 가능한 잔액입니다.",
+        "totalUserEarningsTitle": "'총 사용자 추천 수입'이란 무엇인가요?",
+        "totalUserEarningsDesc": "이는 프로토콜에서 시스템의 모든 사용자에게 지급된 모든 커미션의 총액을 나타냅니다.",
+        "protocolBalanceTitle": "'프로토콜 잔액'이란 무엇인가요?",
+        "protocolBalanceDesc": "이 수치는 모든 사용자 커미션이 공제된 후 프로토콜이 보유한 총 자금을 보여줍니다. 이는 행정 인출에 사용할 수 있는 주요 자금 풀입니다."
+      }
     },
     "userManagement": {
-        "title": "사용자 관리",
-        "createButton": "2단계 계정 만들기",
-        "searchPlaceholder": "이름, 이메일 또는 사용자 이름으로 검색...",
-        "table": {
-            "name": "이름",
-            "email": "이메일",
-            "balance": "잔액",
-            "status": "상태",
-            "actions": "작업",
-            "manage": "관리"
-        }
+      "title": "사용자 관리",
+      "createButton": "2단계 계정 만들기",
+      "searchPlaceholder": "이름, 이메일 또는 사용자 이름으로 검색...",
+      "table": {
+        "name": "이름",
+        "email": "이메일",
+        "balance": "잔액",
+        "status": "상태",
+        "actions": "작업",
+        "manage": "관리"
+      }
     },
     "userDetailModal": {
-        "title": "사용자 관리: {{name}}",
-        "info": "계정 정보",
-        "email": "이메일:",
-        "username": "사용자 이름:",
-        "kycStatus": "KYC 상태:",
-        "adjustBalance": "잔액 조정",
-        "accountStatus": "계정 상태",
-        "withdrawalStatus": "인출 상태",
-        "save": "변경 사항 저장",
-        "cancel": "취소",
-        "success": "사용자가 성공적으로 업데이트되었습니다!"
+      "title": "사용자 관리: {{name}}",
+      "info": "계정 정보",
+      "email": "이메일:",
+      "username": "사용자 이름:",
+      "kycStatus": "KYC 상태:",
+      "adjustBalance": "잔액 조정",
+      "accountStatus": "계정 상태",
+      "withdrawalStatus": "인출 상태",
+      "save": "변경사항 저장",
+      "cancel": "취소",
+      "success": "사용자가 성공적으로 업데이트되었습니다!"
     },
     "createUserModal": {
-        "title": "새 2단계 계정 만들기",
-        "desc": "새 사용자 계정을 수동으로 만듭니다. 이 계정에는 결제 수수료가 필요하지 않습니다. 선택적으로 추천인을 할당할 수 있습니다.",
-        "firstName": "이름",
-        "lastName": "성",
-        "email": "이메일 주소",
-        "username": "사용자 이름",
-        "referrer": "추천인 사용자 이름(선택 사항)",
-        "password": "비밀번호",
-        "passwordNote": "기본 비밀번호가 제공됩니다. 사용자는 로그인 후 변경할 수 있습니다.",
-        "button": "사용자 만들기"
+      "title": "새 2단계 계정 만들기",
+      "desc": "새 사용자 계정을 수동으로 만듭니다. 이 계정은 결제 수수료가 필요하지 않습니다. 선택적으로 추천인을 할당할 수 있습니다.",
+      "firstName": "이름",
+      "lastName": "성",
+      "email": "이메일 주소",
+      "username": "사용자 이름",
+      "referrer": "추천인 코드",
+      "password": "비밀번호",
+      "passwordNote": "기본 비밀번호가 제공됩니다. 사용자는 로그인 후 변경할 수 있습니다.",
+      "button": "사용자 만들기"
     },
     "transactions": {
-        "title": "글로벌 거래 기록"
+      "title": "전역 거래 기록"
     },
     "withdrawals": {
-        "title": "인출 관리",
-        "method": "방법",
-        "noRequests": "대기 중인 인출 요청이 없습니다.",
-        "approve": "승인",
-        "deny": "거부"
+      "title": "인출 관리",
+      "method": "방법",
+      "noRequests": "대기 중인 인출 요청이 없습니다.",
+      "approve": "승인",
+      "deny": "거부"
     },
     "kyc": {
-        "title": "KYC 관리",
-        "submitted": "제출됨:",
-        "addressDetails": "주소 세부 정보",
-        "viewDocument": "문서 보기",
-        "noRequests": "대기 중인 KYC 요청이 없습니다.",
-        "rejectionModal": {
-            "title": "KYC 제출 거부",
-            "prompt": "{{name}}의 제출을 거부하는 이유를 제공하세요.",
-            "reasonLabel": "거부 사유(선택 사항)",
-            "reasonPlaceholder": "예: 문서가 흐릿했습니다.",
-            "confirm": "거부 확인"
-        }
+      "title": "KYC 관리",
+      "submitted": "제출됨:",
+      "addressDetails": "주소 세부 정보",
+      "viewDocument": "문서 보기",
+      "noRequests": "대기 중인 KYC 요청이 없습니다.",
+      "rejectionModal": {
+        "title": "KYC 제출 거부",
+        "prompt": "{{name}}에 대한 제출을 거부하는 이유를 입력하세요.",
+        "reasonLabel": "거부 사유(선택 사항)",
+        "reasonPlaceholder": "예: 문서가 흐릿했습니다.",
+        "confirm": "거부 확인"
+      }
+    },
+    "settings": {
+      "title": "관리자 설정",
+      "password": {
+        "title": "비밀번호 변경",
+        "current": "현재 비밀번호",
+        "new": "새 비밀번호",
+        "confirm": "새 비밀번호 확인",
+        "button": "비밀번호 변경"
+      },
+      "pin": {
+        "changeButton": "PIN 변경",
+        "currentPassword": "현재 관리자 비밀번호",
+        "saveButton": "새 PIN 저장"
+      },
+      "2fa": {
+        "title": "2단계 인증(2FA)",
+        "description": "로그인 시 두 번째 인증 단계를 요구하여 계정 보안을 강화하세요.",
+        "enableModalTitle": "2FA 활성화",
+        "disableModalTitle": "2FA 비활성화",
+        "enableStep1": "1. 인증 앱으로 이 QR 코드를 스캔하세요.",
+        "enableStep2": "또는 이 키를 수동으로 입력하세요:",
+        "enableStep3": "2. 앱에서 6자리 코드를 입력하세요.",
+        "verificationCode": "인증 코드",
+        "buttonVerifyEnable": "인증 및 활성화",
+        "disablePrompt": "확인하려면 인증 앱에서 6자리 코드를 입력하세요.",
+        "authCode": "인증 코드",
+        "buttonVerifyDisable": "확인 및 비활성화"
+      }
     }
   }
 }

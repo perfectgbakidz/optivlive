@@ -40,7 +40,7 @@ export const ContactPage: React.FC = () => {
         setError('');
         setSuccessMessage('');
         try {
-            const res = await api.mockSubmitContactForm(formData);
+            const res = await api.submitContactForm(formData);
             setSuccessMessage(res.message);
             setFormData(prev => ({
                 ...prev,

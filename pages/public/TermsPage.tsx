@@ -10,7 +10,7 @@ type TermsSection = {
 
 export const TermsPage: React.FC = () => {
     const { t } = useTranslation();
-    const sections: TermsSection[] = t('termsPage.sections', { returnObjects: true });
+    const sections = t('termsPage.sections', { returnObjects: true }) as TermsSection[];
 
     return (
         <PageWrapper title={t('termsPage.title')}>

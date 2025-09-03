@@ -11,7 +11,7 @@ interface FaqItem {
 
 export const FaqPage: React.FC = () => {
     const { t } = useTranslation();
-    const faqs: FaqItem[] = t('faqPage.faqs', { returnObjects: true });
+    const faqs = t('faqPage.faqs', { returnObjects: true }) as FaqItem[];
 
     return (
         <PageWrapper title={t('faqPage.title')}>

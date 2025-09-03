@@ -53,7 +53,9 @@
       "failed": "Fallido",
       "active": "Activo",
       "frozen": "Congelado",
-      "paused": "Pausado"
+      "paused": "Pausado",
+      "verified": "Verificado",
+      "unverified": "No Verificado"
     }
   },
   "forms": {
@@ -99,6 +101,12 @@
       "usernameAvailable": "¡Nombre de usuario disponible!",
       "usernameTaken": "El nombre de usuario ya está en uso.",
       "referralCodePlaceholder": "Código de Referencia",
+      "firstNamePlaceholder": "Nombre",
+      "lastNamePlaceholder": "Apellido",
+      "usernamePlaceholder": "Nombre de usuario",
+      "emailPlaceholder": "Dirección de correo electrónico",
+      "passwordPlaceholder": "Contraseña",
+      "confirmPasswordPlaceholder": "Confirmar contraseña",
       "button": "Crear",
       "hasAccount": "¿Ya tienes una cuenta? "
     },
@@ -404,8 +412,8 @@
     }
   },
   "testingBanner": {
-    "title": "Modo de Prueba Activo",
-    "description": "Esta aplicación se está ejecutando en un entorno simulado. Todos los datos son datos de prueba.",
+    "title": "Demostración en Vivo",
+    "description": "Este es un entorno de demostración en vivo. Puede utilizar las siguientes credenciales para realizar pruebas.",
     "userLogin": "Inicio de Sesión de Usuario:",
     "email": "Correo Electrónico:",
     "pass": "Contraseña:",
@@ -589,17 +597,19 @@
       "kycManagement": "Gestión de KYC",
       "withdrawals": "Retiros",
       "transactions": "Transacciones",
-      "role": "Administrador"
+      "role": "Administrador",
+      "settings": "Configuración"
     },
     "overview": {
       "title": "Panel de Administrador",
       "masterDashboardTitle": "Panel de la Cuenta Maestra",
-      "totalRefEarnings": "Ganancias Totales por Referidos",
+      "myRefEarnings": "Mis Ganancias por Referidos",
       "balance": "Saldo",
       "withdrawalsCard": {
         "title": "Gestión de Retiros",
         "subtitle": "Gestiona y retira el saldo de la cuenta maestra.",
-        "link": "Ir a Retiros →"
+        "withdraw_button": "Retirar Mi Saldo",
+        "manage_users_link": "Gestionar Retiros de Usuarios →"
       },
       "platformControlsTitle": "Controles y Resumen de la Plataforma",
       "totalUserEarnings": "Ganancias Totales por Referidos de Usuarios",
@@ -618,6 +628,17 @@
         "title": "Controles de Retiro Globales",
         "allUserWithdrawals": "Todos los Retiros de Usuarios",
         "desc": "Este interruptor pausa o reanuda inmediatamente los retiros para todos los usuarios de la plataforma."
+      },
+      "metricsExplainedTitle": "Explicación de Métricas",
+      "metrics": {
+          "myEarningsTitle": "¿Qué son 'Mis Ganancias por Referidos'?",
+          "myEarningsDesc": "Esta es la comisión total ganada directamente por la cuenta de administrador 'maestra' a través de su propio código de referido.",
+          "myBalanceTitle": "¿Qué es 'Mi Saldo'?",
+          "myBalanceDesc": "Este es el saldo retirable actual que posee la cuenta de administrador 'maestra', separado de los fondos principales del protocolo.",
+          "totalUserEarningsTitle": "¿Qué son 'Ganancias Totales por Referidos de Usuarios'?",
+          "totalUserEarningsDesc": "Esto representa el total general de todas las comisiones que se han pagado desde el protocolo a cada usuario en el sistema.",
+          "protocolBalanceTitle": "¿Qué es el 'Saldo del Protocolo'?",
+          "protocolBalanceDesc": "Esta cifra muestra los fondos totales que posee el protocolo después de deducir todas las comisiones de los usuarios. Es el principal fondo de fondos disponible para el retiro administrativo."
       }
     },
     "userManagement": {
@@ -653,7 +674,7 @@
       "lastName": "Apellido",
       "email": "Dirección de Correo Electrónico",
       "username": "Nombre de Usuario",
-      "referrer": "Nombre de Usuario del Referente (Opcional)",
+      "referrer": "Código de Referente",
       "password": "Contraseña",
       "passwordNote": "Se proporciona una contraseña predeterminada. El usuario puede cambiarla después de iniciar sesión.",
       "button": "Crear Usuario"
@@ -681,6 +702,35 @@
         "reasonPlaceholder": "p. ej., el documento estaba borroso.",
         "confirm": "Confirmar Rechazo"
       }
+    },
+    "settings": {
+        "title": "Configuración de Administrador",
+        "password": {
+            "title": "Cambiar Contraseña",
+            "current": "Contraseña Actual",
+            "new": "Nueva Contraseña",
+            "confirm": "Confirmar Nueva Contraseña",
+            "button": "Cambiar Contraseña"
+        },
+        "pin": {
+            "changeButton": "Cambiar PIN",
+            "currentPassword": "Contraseña de Administrador Actual",
+            "saveButton": "Guardar Nuevo PIN"
+        },
+        "2fa": {
+            "title": "Autenticación de Dos Factores (2FA)",
+            "description": "Mejora la seguridad de tu cuenta requiriendo un segundo paso de verificación al iniciar sesión.",
+            "enableModalTitle": "Habilitar 2FA",
+            "disableModalTitle": "Deshabilitar 2FA",
+            "enableStep1": "1. Escanea este código QR con tu aplicación de autenticación.",
+            "enableStep2": "O introduce esta clave manualmente:",
+            "enableStep3": "2. Introduce el código de 6 dígitos de tu aplicación.",
+            "verificationCode": "Código de Verificación",
+            "buttonVerifyEnable": "Verificar y Habilitar",
+            "disablePrompt": "Para confirmar, por favor, introduce un código de 6 dígitos de tu aplicación de autenticación.",
+            "authCode": "Código de Autenticación",
+            "buttonVerifyDisable": "Confirmar y Deshabilitar"
+        }
     }
   }
 }

@@ -5,7 +5,7 @@ import { useAuth } from '../../../hooks/useAuth';
 import * as api from '../../../services/api';
 import { StatCard } from '../../../components/ui/StatCard';
 import { Spinner } from '../../../components/ui/Spinner';
-import { DashboardStats, DownlineLevel } from '../../../types';
+import { DashboardStats, DownlineLevel, TeamMember } from '../../../types';
 import { ReferralCard } from '../../../components/dashboard/ReferralCard';
 
 export const OverviewTab: React.FC = () => {
@@ -20,11 +20,39 @@ export const OverviewTab: React.FC = () => {
         setIsLoading(true);
         setError('');
         try {
-            // Note: These endpoints are not in the backend docs and are still mocked.
-            // They need to be replaced with real API endpoints when available.
-            const statsData = await api.mockFetchDashboardStats();
+            const [statsData, teamTreeData] = await Promise.all([
+                api.getDashboardStats(),
+                api.getTeamTree()
+            ]);
             setStats(statsData);
-            setDownline([]); // No endpoint for downline data
+
+            const processDownline = (team: TeamMember[]): DownlineLevel[] => {
+                const levels: { [level: number]: { users: number, earnings: number } } = {};
+
+                function traverse(nodes: TeamMember[], level: number) {
+                    if (!nodes || nodes.length === 0) return;
+
+                    if (!levels[level]) {
+                        levels[level] = { users: 0, earnings: 0 };
+                    }
+                    
+                    nodes.forEach(node => {
+                        levels[level].users += 1;
+                        // Earnings per member are not available in the /team/tree/ response
+                        traverse(node.children, level + 1);
+                    });
+                }
+                
+                traverse(team, 1); // Start traversal
+
+                return Object.entries(levels).map(([level, data]) => ({
+                    level: parseInt(level, 10),
+                    users: data.users,
+                    earnings: 0, // Set earnings to 0 as it's not provided by the API
+                })).sort((a,b) => a.level - b.level);
+            };
+
+            setDownline(processDownline(teamTreeData));
         } catch (err) {
             setError('Failed to load dashboard data.');
         } finally {
@@ -51,7 +79,7 @@ export const OverviewTab: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <StatCard 
                     title={t('dashboard.overview.totalEarnings')} 
-                    value={`£${stats?.totalEarnings.toFixed(2) || '0.00'}`} 
+                    value={`£${(stats?.totalEarnings ?? 0).toFixed(2)}`} 
                     icon={<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-brand-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01" /></svg>}
                 />
                 <StatCard 
@@ -78,9 +106,8 @@ export const OverviewTab: React.FC = () => {
                                     <div key={level.level} className="bg-brand-dark/40 p-4 rounded-lg border border-brand-ui-element/20">
                                         <div className="flex justify-between items-center">
                                             <span className="font-bold text-white">{t('dashboard.overview.level')} {level.level}</span>
-                                            <span className="font-semibold text-brand-secondary">£{level.earnings.toFixed(2)}</span>
+                                            <p className="text-sm text-brand-light-gray mt-1">{level.users} {t('dashboard.overview.users')}</p>
                                         </div>
-                                        <p className="text-sm text-brand-light-gray mt-1">{level.users} {t('dashboard.overview.users')}</p>
                                     </div>
                                 ))}
                             </div>
@@ -93,7 +120,6 @@ export const OverviewTab: React.FC = () => {
                                     <tr>
                                         <th className="p-4 font-semibold text-brand-white">{t('dashboard.overview.level')}</th>
                                         <th className="p-4 font-semibold text-brand-white">{t('dashboard.overview.users')}</th>
-                                        <th className="p-4 font-semibold text-brand-white">{t('dashboard.overview.earningsFromTier')}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -101,7 +127,6 @@ export const OverviewTab: React.FC = () => {
                                         <tr key={level.level} className="border-b border-brand-ui-element/20 last:border-0">
                                             <td className="p-4">{level.level}</td>
                                             <td className="p-4">{level.users}</td>
-                                            <td className="p-4 text-brand-secondary">£{level.earnings.toFixed(2)}</td>
                                         </tr>
                                     ))}
                                 </tbody>

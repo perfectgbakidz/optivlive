@@ -27,12 +27,12 @@ export const UserDetailModal: React.FC<UserDetailModalProps> = ({ user, onClose,
         setError('');
         setMessage('');
         try {
-            const res = await api.mockAdminUpdateUser(user.id, {
+            const res = await api.adminUpdateUser(user.id, {
                 balance: balance,
                 status,
                 withdrawalStatus
             });
-            onUpdate(res.user);
+            onUpdate(res);
             setMessage(t('admin.userDetailModal.success'));
             setTimeout(() => {
                 onClose();

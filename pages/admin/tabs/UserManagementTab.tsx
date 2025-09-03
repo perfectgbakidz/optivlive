@@ -32,7 +32,7 @@ export const UserManagementTab: React.FC = () => {
     const fetchUsers = async () => {
         setIsLoading(true);
         try {
-            const data = await api.mockFetchAllUsers();
+            const data = await api.adminListUsers();
             setUsers(data);
         } catch (err: any) {
             setError(err.message || 'Failed to load users');

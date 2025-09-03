@@ -46,8 +46,8 @@ export const ResetPasswordPage: React.FC = () => {
 
         setIsLoading(true);
         try {
-            const result = await api.mockResetPassword(token, password);
-            setMessage(result.message);
+            await api.resetPassword(token, password);
+            setMessage("Your password has been reset successfully.");
             setSuccess(true);
         } catch (err: any) {
             setError(err.message || 'Failed to reset password.');

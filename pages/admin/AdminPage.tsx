@@ -12,6 +12,7 @@ import { UserManagementTab } from './tabs/UserManagementTab';
 import { AdminTransactionsTab } from './tabs/AdminTransactionsTab';
 import { WithdrawalManagementTab } from './tabs/WithdrawalManagementTab';
 import { KycManagementTab } from './tabs/KycManagementTab';
+import { AdminSettingsTab } from './tabs/AdminSettingsTab';
 
 const ADMIN_TABS: { [key: string]: React.ComponentType } = {
   overview: AdminOverviewTab,
@@ -19,6 +20,7 @@ const ADMIN_TABS: { [key: string]: React.ComponentType } = {
   kyc: KycManagementTab,
   withdrawals: WithdrawalManagementTab,
   transactions: AdminTransactionsTab,
+  settings: AdminSettingsTab,
 };
 
 export const AdminPage: React.FC = () => {

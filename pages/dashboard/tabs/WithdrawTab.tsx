@@ -32,7 +32,7 @@ const WithdrawalForm: React.FC<{
         setError('');
         setIsLoading(true);
         try {
-            await api.verifyPin(userEmail, pin);
+            await api.verifyPin(pin);
             setNeedsPinVerification(false);
             setMessage("PIN verified successfully. You can now submit your withdrawal.");
         } catch (err: any) {

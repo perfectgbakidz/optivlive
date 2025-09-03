@@ -53,7 +53,9 @@
       "failed": "失敗",
       "active": "アクティブ",
       "frozen": "凍結",
-      "paused": "一時停止"
+      "paused": "一時停止",
+      "verified": "認証済み",
+      "unverified": "未認証"
     }
   },
   "forms": {
@@ -99,6 +101,12 @@
       "usernameAvailable": "ユーザー名は利用可能です！",
       "usernameTaken": "ユーザー名は既に使用されています。",
       "referralCodePlaceholder": "紹介コード",
+      "firstNamePlaceholder": "名",
+      "lastNamePlaceholder": "姓",
+      "usernamePlaceholder": "ユーザー名",
+      "emailPlaceholder": "メールアドレス",
+      "passwordPlaceholder": "パスワード",
+      "confirmPasswordPlaceholder": "パスワードを確認",
       "button": "作成",
       "hasAccount": "すでにアカウントをお持ちですか？ "
     },
@@ -575,112 +583,154 @@
   "admin": {
     "title": "管理者: {{tab}}",
     "loginPage": {
-        "title": "管理者ポータル",
-        "subtitle": "続行するにはログインしてください。",
-        "emailPlaceholder": "管理者メール",
-        "passwordPlaceholder": "管理者パスワード",
-        "button": "ログイン",
-        "return": "ユーザーログインに戻る",
-        "footer": "© Optivusプロトコル。管理者アクセス。"
+      "title": "管理者ポータル",
+      "subtitle": "続行するにはログインしてください。",
+      "emailPlaceholder": "管理者メール",
+      "passwordPlaceholder": "管理者パスワード",
+      "button": "ログイン",
+      "return": "ユーザーログインに戻る",
+      "footer": "© Optivusプロトコル。管理者アクセス。"
     },
     "sidebar": {
-        "overview": "概要",
-        "userManagement": "ユーザー管理",
-        "kycManagement": "KYC管理",
-        "withdrawals": "引き出し",
-        "transactions": "取引",
-        "role": "管理者"
+      "overview": "概要",
+      "userManagement": "ユーザー管理",
+      "kycManagement": "KYC管理",
+      "withdrawals": "引き出し",
+      "transactions": "取引",
+      "role": "管理者",
+      "settings": "設定"
     },
     "overview": {
-        "title": "管理者ダッシュボード",
-        "masterDashboardTitle": "マスターアカウントダッシュボード",
-        "totalRefEarnings": "総紹介収益",
-        "balance": "残高",
-        "withdrawalsCard": {
-            "title": "引き出し管理",
-            "subtitle": "マスターアカウントの残高を管理および引き出します。",
-            "link": "引き出しに進む →"
-        },
-        "platformControlsTitle": "プラットフォームの制御と概要",
-        "totalUserEarnings": "ユーザー総紹介収益",
-        "totalUserEarningsDesc": "すべてのユーザーに分配されたコミッションとボーナスの累計額。",
-        "protocolBalance": "残りのプロトコル残高",
-        "protocolBalanceDesc": "これは、プロトコル管理者が引き出すことができる手数料からの残りの残高です。",
-        "totalUsers": "総ユーザー数",
-        "pendingWithdrawals": "保留中の引き出し",
-        "masterAccountCard": {
-            "title": "マスターアカウント",
-            "desc": "これは、すべての紹介チェーンの起点となる事前に作成されたアカウントです。",
-            "username": "ユーザー名:",
-            "refCode": "紹介コード:"
-        },
-        "globalWithdrawalsCard": {
-            "title": "グローバル引き出し制御",
-            "allUserWithdrawals": "すべてのユーザーの引き出し",
-            "desc": "このスイッチは、プラットフォーム上のすべてのユーザーの引き出しを即座に一時停止または再開します。"
-        }
+      "title": "管理者ダッシュボード",
+      "masterDashboardTitle": "マスターアカウントダッシュボード",
+      "myRefEarnings": "私の紹介収益",
+      "balance": "残高",
+      "withdrawalsCard": {
+        "title": "引き出し管理",
+        "subtitle": "マスターアカウントの残高を管理および引き出します。",
+        "withdraw_button": "残高を引き出す",
+        "manage_users_link": "ユーザーの引き出しを管理 →"
+      },
+      "platformControlsTitle": "プラットフォームの制御と概要",
+      "totalUserEarnings": "ユーザー総紹介収益",
+      "totalUserEarningsDesc": "すべてのユーザーに分配されたコミッションとボーナスの累計額。",
+      "protocolBalance": "残りのプロトコル残高",
+      "protocolBalanceDesc": "これは、プロトコル管理者が引き出すことができる手数料からの残りの残高です。",
+      "totalUsers": "総ユーザー数",
+      "pendingWithdrawals": "保留中の引き出し",
+      "masterAccountCard": {
+        "title": "マスターアカウント",
+        "desc": "これは、すべての紹介チェーンの起点となる事前に作成されたアカウントです。",
+        "username": "ユーザー名:",
+        "refCode": "紹介コード:"
+      },
+      "globalWithdrawalsCard": {
+        "title": "グローバル引き出し制御",
+        "allUserWithdrawals": "すべてのユーザーの引き出し",
+        "desc": "このスイッチは、プラットフォーム上のすべてのユーザーの引き出しを即座に一時停止または再開します。"
+      },
+      "metricsExplainedTitle": "メトリクスの説明",
+      "metrics": {
+        "myEarningsTitle": "「私の紹介収益」とは何ですか？",
+        "myEarningsDesc": "これは、「マスター」管理者アカウントが自身の紹介コードを通じて直接獲得した総コミッションです。",
+        "myBalanceTitle": "「私の残高」とは何ですか？",
+        "myBalanceDesc": "これは、主要なプロトコル資金とは別に、「マスター」管理者アカウント自体が保有する現在の引き出し可能残高です。",
+        "totalUserEarningsTitle": "「ユーザー総紹介収益」とは何ですか？",
+        "totalUserEarningsDesc": "これは、プロトコルからシステム内のすべてのユーザーに支払われたすべてのコミッションの総額を表します。",
+        "protocolBalanceTitle": "「プロトコル残高」とは何ですか？",
+        "protocolBalanceDesc": "この数値は、すべてのユーザーコミッションが差し引かれた後にプロトコルが保有する総資金を示します。これは、管理上の引き出しに利用できる主要な資金プールです。"
+      }
     },
     "userManagement": {
-        "title": "ユーザー管理",
-        "createButton": "ティア2アカウントを作成",
-        "searchPlaceholder": "名前、メール、またはユーザー名で検索...",
-        "table": {
-            "name": "名前",
-            "email": "メール",
-            "balance": "残高",
-            "status": "ステータス",
-            "actions": "アクション",
-            "manage": "管理"
-        }
+      "title": "ユーザー管理",
+      "createButton": "ティア2アカウントを作成",
+      "searchPlaceholder": "名前、メール、またはユーザー名で検索...",
+      "table": {
+        "name": "名前",
+        "email": "メール",
+        "balance": "残高",
+        "status": "ステータス",
+        "actions": "アクション",
+        "manage": "管理"
+      }
     },
     "userDetailModal": {
-        "title": "ユーザーを管理: {{name}}",
-        "info": "アカウント情報",
-        "email": "メール:",
-        "username": "ユーザー名:",
-        "kycStatus": "KYCステータス:",
-        "adjustBalance": "残高を調整",
-        "accountStatus": "アカウントステータス",
-        "withdrawalStatus": "引き出しステータス",
-        "save": "変更を保存",
-        "cancel": "キャンセル",
-        "success": "ユーザーが正常に更新されました！"
+      "title": "ユーザーを管理: {{name}}",
+      "info": "アカウント情報",
+      "email": "メール:",
+      "username": "ユーザー名:",
+      "kycStatus": "KYCステータス:",
+      "adjustBalance": "残高を調整",
+      "accountStatus": "アカウントステータス",
+      "withdrawalStatus": "引き出しステータス",
+      "save": "変更を保存",
+      "cancel": "キャンセル",
+      "success": "ユーザーが正常に更新されました！"
     },
     "createUserModal": {
-        "title": "新しいティア2アカウントを作成",
-        "desc": "新しいユーザーアカウントを手動で作成します。このアカウントには支払い手数料は必要ありません。オプションで紹介者を割り当てることができます。",
-        "firstName": "名",
-        "lastName": "姓",
-        "email": "メールアドレス",
-        "username": "ユーザー名",
-        "referrer": "紹介者のユーザー名（オプション）",
-        "password": "パスワード",
-        "passwordNote": "デフォルトのパスワードが提供されます。ユーザーはログイン後に変更できます。",
-        "button": "ユーザーを作成"
+      "title": "新しいティア2アカウントを作成",
+      "desc": "新しいユーザーアカウントを手動で作成します。このアカウントには支払い手数料は必要ありません。オプションで紹介者を割り当てることができます。",
+      "firstName": "名",
+      "lastName": "姓",
+      "email": "メールアドレス",
+      "username": "ユーザー名",
+      "referrer": "紹介者のコード",
+      "password": "パスワード",
+      "passwordNote": "デフォルトのパスワードが提供されます。ユーザーはログイン後に変更できます。",
+      "button": "ユーザーを作成"
     },
     "transactions": {
-        "title": "グローバル取引履歴"
+      "title": "グローバル取引履歴"
     },
     "withdrawals": {
-        "title": "引き出し管理",
-        "method": "方法",
-        "noRequests": "保留中の引き出しリクエストはありません。",
-        "approve": "承認",
-        "deny": "拒否"
+      "title": "引き出し管理",
+      "method": "方法",
+      "noRequests": "保留中の引き出しリクエストはありません。",
+      "approve": "承認",
+      "deny": "拒否"
     },
     "kyc": {
-        "title": "KYC管理",
-        "submitted": "提出日:",
-        "addressDetails": "住所の詳細",
-        "viewDocument": "ドキュメントを表示",
-        "noRequests": "保留中のKYCリクエストはありません。",
-        "rejectionModal": {
-            "title": "KYC提出を拒否",
-            "prompt": "{{name}}の提出を拒否する理由を入力してください。",
-            "reasonLabel": "拒否理由（オプション）",
-            "reasonPlaceholder": "例：ドキュメントがぼやけていた。",
-            "confirm": "拒否を確認"
-        }
+      "title": "KYC管理",
+      "submitted": "提出日:",
+      "addressDetails": "住所の詳細",
+      "viewDocument": "ドキュメントを表示",
+      "noRequests": "保留中のKYCリクエストはありません。",
+      "rejectionModal": {
+        "title": "KYC提出を拒否",
+        "prompt": "{{name}}の提出を拒否する理由を入力してください。",
+        "reasonLabel": "拒否理由（オプション）",
+        "reasonPlaceholder": "例：ドキュメントがぼやけていた。",
+        "confirm": "拒否を確認"
+      }
+    },
+    "settings": {
+      "title": "管理者設定",
+      "password": {
+        "title": "パスワードを変更",
+        "current": "現在のパスワード",
+        "new": "新しいパスワード",
+        "confirm": "新しいパスワードを確認",
+        "button": "パスワードを変更"
+      },
+      "pin": {
+        "changeButton": "PINを変更",
+        "currentPassword": "現在の管理者パスワード",
+        "saveButton": "新しいPINを保存"
+      },
+      "2fa": {
+        "title": "2要素認証（2FA）",
+        "description": "ログイン時に2段階目の認証を要求することで、アカウントのセキュリティを強化します。",
+        "enableModalTitle": "2FAを有効にする",
+        "disableModalTitle": "2FAを無効にする",
+        "enableStep1": "1. このQRコードを認証アプリでスキャンします。",
+        "enableStep2": "または、このキーを手動で入力します：",
+        "enableStep3": "2. アプリから6桁のコードを入力します。",
+        "verificationCode": "認証コード",
+        "buttonVerifyEnable": "確認して有効にする",
+        "disablePrompt": "確認するには、認証アプリから6桁のコードを入力してください。",
+        "authCode": "認証コード",
+        "buttonVerifyDisable": "確認して無効にする"
+      }
     }
   }
 }

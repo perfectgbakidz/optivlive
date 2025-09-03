@@ -53,7 +53,9 @@
       "failed": "Failed",
       "active": "Active",
       "frozen": "Frozen",
-      "paused": "Paused"
+      "paused": "Paused",
+      "verified": "Verified",
+      "unverified": "Unverified"
     }
   },
   "forms": {
@@ -99,6 +101,12 @@
       "usernameAvailable": "Username is available!",
       "usernameTaken": "Username is already taken.",
       "referralCodePlaceholder": "Referral Code",
+      "firstNamePlaceholder": "First Name",
+      "lastNamePlaceholder": "Last Name",
+      "usernamePlaceholder": "Username",
+      "emailPlaceholder": "Email Address",
+      "passwordPlaceholder": "Password",
+      "confirmPasswordPlaceholder": "Confirm Password",
       "button": "Create",
       "hasAccount": "Already have an account? "
     },
@@ -233,11 +241,11 @@
     "version": "Version 1.0 | July 2025",
     "abstract": {
       "title": "Abstract",
-      "p1": "Optivus Protocol is advancing the next phase of Web3 through a combination of sustainable tokenomics, fixed supply strategy, and community-led growth. Designed for stability and long-term utility, the OPTIV token prioritizes real-world value, not speculative hype. Our mission is to create a more trustworthy, human-centered digital economy by rewarding meaningful participation and removing predatory mechanics from the Web3 equation."
+      "p1": "Optivus Protocol is advancing the next phase of Web3 through a combination of sustainable tokenomics, a fixed-supply strategy, and community-led growth. Designed for stability and long-term utility, the OPTIV token prioritizes real-world value, not speculative hype. Our mission is to create a more trustworthy, human-centric digital economy by rewarding meaningful participation and removing predatory mechanisms from the Web3 equation."
     },
     "introduction": {
       "title": "1. Introduction",
-      "p1": "The Web3 ecosystem has grown rapidly—but often at the cost of long-term sustainability, user trust, and meaningful utility. Optivus Protocol introduces a new standard: a fixed-supply, deflation-aware store-of-value token (OPTIV) that incentivizes holding, strengthens network participation, and aligns with real economic principles."
+      "p1": "The Web3 ecosystem has grown rapidly—but often at the expense of long-term sustainability, user trust, and meaningful utility. Optivus Protocol introduces a new standard: a fixed-supply, deflation-aware store-of-value token (OPTIV) that incentivizes holding, strengthens network participation, and aligns with real-world economic principles."
     },
     "visionMission": {
       "title": "2. Vision & Mission",
@@ -263,9 +271,9 @@
       "sovTitle": "4.1 Store-of-Value Architecture",
       "sovText": "Unlike volatile, hype-based tokens, OPTIV is engineered to be held:",
       "sovPoints": [
-        "Fixed Max Supply: 10 billion OPTIV – no inflation.",
+        "Fixed Maximum Supply: 10 billion OPTIV – no inflation.",
         "Deflationary Potential: Burnable via transactions, fees, or governance-triggered.",
-        "Staking-Ready: Optional yield mechanics via existing pool, not inflation."
+        "Staking-Ready: Optional yield mechanics via the existing pool, not inflation."
       ],
       "sovConclusion": "This model supports long-term trust and minimizes price volatility.",
       "liquidityTitle": "4.2 Liquidity Strategy",
@@ -277,28 +285,28 @@
       "pool2Text1": "3M OPTIV + $3,000 SOL",
       "pool2Text2": "Reduces SOL exposure risk during market downturns",
       "liquidityPoints": [
-        "Protects price floor",
+        "Protects the price floor",
         "Encourages utility adoption",
-        "Reduces impact of token dumps"
+        "Reduces token dump impact"
       ]
     },
     "growthEngine": {
       "title": "5. Referral-Based Growth Engine",
-      "p1": "Traditional crypto projects reward only buyers. Optivus rewards contributors.",
+      "p1": "Traditional crypto projects only reward buyers. Optivus rewards contributors.",
       "listTitle": "Referral Model Highlights:",
       "listItems": [
-        "Multi-level rewards structure",
+        "Multi-level reward structure",
         "Incentivizes real network expansion",
         "Strengthens community ownership"
       ],
       "p2": "This system makes the Web3 onboarding process inclusive, transparent, and human-first."
     },
     "advancedTokenomics": {
-      "title": "6. Advanced Tokenomics with Purpose",
+      "title": "6. Advanced Tokenomics with a Purpose",
       "listItems": [
         "Fair Distribution: No hidden minting or unfair insider allocations",
         "Transparency: Public access to token flow, reserves, and rewards",
-        "Treasury-Controlled Reserves: Reserved funds for development, marketing, and stabilization"
+        "Treasury-Controlled Reserves: Funds set aside for development, marketing, and stabilization"
       ]
     },
     "optionalFeatures": {
@@ -314,24 +322,24 @@
       "stakingTitle": "Staking System (Under Review)",
       "stakingList": [
         "Lockup-based yield potential",
-        "No new token emissions — rewards sourced from existing token pool",
+        "No new token emissions — rewards sourced from the existing token pool",
         "Time-weighted multipliers under consideration"
       ]
     },
     "positioning": {
       "title": "8. Strategic Positioning",
-      "identity": "Core Identity: \"The modern store of value: scarce, secure, scalable.\"",
+      "identity": "Core Identity: “The modern store of value: scarce, secure, scalable.”",
       "pillarsTitle": "Messaging Pillars:",
       "pillars": [
         "Scarcity + Trust = Value",
-        "Hold-to-earn mindset",
+        "Hold-to-earn mentality",
         "Stability > speculation"
       ],
       "taglinesTitle": "Key Taglines:",
       "taglines": [
-        "\"Built to hold. Designed to grow.”",
-        "\"Optivus: Your future in digital form.\"",
-        "\"Wealth you can own, not inflate.\""
+        "“Built to hold. Designed to grow.”",
+        "“Optivus: Your future in digital form.”",
+        "“Wealth you can own, not inflate away.”"
       ]
     },
     "marketFit": {
@@ -339,9 +347,9 @@
       "audienceTitle": "Audience—Value Proposition",
       "audiences": [
         "Long-Term Holders—Asset protection, fixed supply, staking options",
-        "Crypto Newcomers—Clean design, clear use case, trust-first approach",
+        "Crypto Newcomers—Clean design, clear use-case, trust-first approach",
         "DeFi Users—Advanced mechanics, vault/staking potential",
-        "Global Audiences—Hedge against inflation, store of value in unstable markets"
+        "Global Audiences—Inflation hedge, store of value in unstable markets"
       ]
     },
     "governance": {
@@ -352,7 +360,7 @@
         "Governance token integrations",
         "Proposal and voting systems"
       ],
-      "p2": "All designed to give real power back to users, not centralized teams."
+      "p2": "All designed to give real power back to the users, not centralized teams."
     },
     "summary": {
       "title": "11. Summary Snapshot",
@@ -373,28 +381,28 @@
     },
     "closing": {
       "title": "12. Closing Thoughts",
-      "p1": "Optivus Protocol isn't just another token. It's a movement to reclaim what crypto was meant to be—transparent, fair, and empowering. With robust tokenomics, sustainable design, and community-aligned incentives, OPTIV is laying the foundation for a more stable and rewarding digital economy."
+      "p1": "Optivus Protocol is not just another token. It is a movement to reclaim what crypto was meant to be—transparent, fair, and empowering. With robust tokenomics, a sustainable design, and community-aligned incentives, OPTIV is laying the groundwork for a more stable and rewarding digital economy."
     }
   },
   "termsPage": {
     "title": "Optivus Protocol Program Terms of Service",
     "lastUpdated": "Last Updated: 25/07/2025",
-    "intro": "Welcome to the Optivus Protocol Referral Program (\"Program\"). This Program is designed to reward our community for sharing access to Optivus and its ecosystem. By participating, you agree to comply with these Terms of Service (\"Terms\"). Please read them carefully.",
+    "intro": "Welcome to the Optivus Protocol Referral Program (\"Program\"). This Program is designed to reward our community for sharing access to Optivus and its ecosystem. By participating, you agree to abide by these Terms of Service (\"Terms\"). Please read them carefully.",
     "sections": [
-        { "title": "Overview", "content": ["The Optivus Protocol Referral Program is an optional feature available to users of the OPTiVision platform. By referring new users who purchase access to OPTiVision services, participants may receive limited promotional rewards. Participation is entirely voluntary and is not required to access the platform."] },
-        { "title": "OPTiVision Paid Access Benefits", "content": ["All paying users of OPTiVision receive:", "Full access to our exclusive Discord community", "Access to staking dashboards and performance analytics", "Eligibility for community airdrops, competitions, and updates", "<i>Note: Referral rewards are optional promotional bonuses and are not part of the core OPTiVision product offering.</i>"] },
+        { "title": "Overview", "content": ["The Optivus Protocol Referral Program is an optional feature available to users of the OPTiVision platform. By referring new users who purchase access to OPTiVision services, participants may receive limited promotional rewards. Participation is entirely voluntary and is not required for accessing the platform."] },
+        { "title": "OPTiVision Paid Access Benefits", "content": ["All paying OPTiVision users receive:", "Full access to our exclusive Discord community", "Access to staking dashboards and performance analytics", "Eligibility for community airdrops, competitions, and updates", "<i>Note: Referral rewards are optional promotional bonuses and not part of the core OPTiVision product offering.</i>"] },
         { 
-          "title": "Referral Rewards Structure", 
+          "title": "Referral Reward Structure", 
           "content": [
-            "Reward Levels", "<strong>Level 1 (Direct Bonus):</strong> A reward for each referred user who signs up and pays.", "<strong>Levels 2-6 (Indirect Bonus):</strong> Rewards for referrals made by your invitees, decreasing by 15% per level (e.g., Level 2 receives 85% of Level 1 value, Level 3 receives 70%, etc.).", 
+            "Reward Tiers", "<strong>Tier 1 (Direct Bonus):</strong> A reward for each referred user who signs up and pays.", "<strong>Tiers 2-6 (Indirect Bonus):</strong> Rewards for referrals made by your invitees, decreasing by 15% per tier (e.g., Tier 2 receives 85% of Tier 1's value, Tier 3 receives 70%, etc.).", 
             "Possible Rewards", "$OPTIV tokens", "Boosted staking rewards", "Airdrop priority", "Promotional cash equivalents (via Stripe, PayPal, or other supported methods)", 
-            "<strong>Important:</strong> All rewards are discretionary, limited in availability, and not guaranteed. Referral bonuses are subject to modification, suspension, or cancellation at any time at Optivus' sole discretion."
+            "<strong>Important:</strong> All rewards are discretionary, limited in availability, and not guaranteed. Referral bonuses are subject to modification, suspension, or cancellation at any time in Optivus’s sole discretion."
           ] 
         },
-        { "title": "Program Rules & Participant Obligations", "content": ["This Program is a promotional campaign—not an income opportunity or investment program. Participants must agree to the following:", "Creating multiple accounts, engaging in fraud, or abusing the referral system will result in immediate disqualification.", "Referral links must not be distributed through spam, deceptive promotions, or in violation of Optivus' Terms of Use.", "Participants may not present the Program as a guaranteed source of income or investment opportunity.", "Referral bonuses are not dependent on downstream referral volume beyond the sixth level.", "All promotional activities must comply with local, state, and international laws."] },
-        { "title": "Legal & Compliance Notice", "content": ["This Program does not constitute a financial service, investment opportunity, or income-generating scheme.", "Optivus Protocol makes no guarantees regarding the monetary value or availability of any referral bonus.", "Participants are solely responsible for reporting any rewards as taxable income, where applicable.", "The Program is void where prohibited by law. Participants must comply with all relevant local regulations.", "Referral bonuses are funded from Optivus' marketing budget—not from user subscription payments.", "$OPTIV tokens and promotional payouts do not represent securities, equity, or investment instruments.", "Participation is void if a user violates Optivus Platform Terms of Use."] },
-        { "title": "Promotional Giveaways & Launch Bonuses", "content": ["As part of marketing campaigns, Optivus may offer:", "Optional giveaways of $OPTIV tokens to active, paying users", "Additional entries or bonuses for referrals made up to six levels", "Nominal indirect referral rewards (Levels 2–6), decreasing by 15% per level to ensure fairness and sustainability", "<i>Disclaimer: Giveaways and launch bonuses are optional and time-limited. They hold no guaranteed or intrinsic monetary value and are subject to change.</i>"] },
-        { "title": "Program Administration & Authority", "content": ["Optivus reserves the right to:", "Modify, suspend, or terminate the Program at any time without prior notice", "Make final decisions regarding disputes, fraud investigations, and eligibility assessments", "Determine bonus eligibility, limit rewards, and enforce Program rules at its sole discretion", "To remain eligible for referral bonuses, participants must:", "Maintain an active, paid OPTiVision subscription", "Abide by all Optivus platform policies, including the Terms of Use", "Ensure all promotional activity remains lawful and aligned with platform guidelines"] },
+        { "title": "Program Rules & Participant Obligations", "content": ["This Program is a promotional campaign—not an income opportunity or investment program. Participants must agree to the following:", "Creating multiple accounts, engaging in fraud, or abusing the referral system will result in immediate disqualification.", "Referral links are not to be distributed via spam, deceptive promotions, or in violation of the Optivus Terms of Use.", "Participants may not represent the Program as a guaranteed source of income or an investment opportunity.", "Referral bonuses are not dependent on downstream referral volume beyond the sixth tier.", "All promotional activities must comply with local, state, and international law."] },
+        { "title": "Legal & Compliance Notice", "content": ["This Program does not constitute a financial service, investment opportunity, or income-generating scheme.", "Optivus Protocol makes no guarantees regarding the monetary value or availability of any referral bonus.", "Participants are solely responsible for reporting any rewards as taxable income, where applicable.", "The Program is void where prohibited by law. Participants must comply with all relevant local regulations.", "Referral bonuses are funded from Optivus’s marketing budget—not from user subscription payments.", "$OPTIV tokens and promotional payouts do not represent securities, equity, or investment instruments.", "Participation is void if a user violates the Optivus Platform Terms of Use."] },
+        { "title": "Promotional Giveaways & Launch Bonuses", "content": ["As part of marketing campaigns, Optivus may offer:", "Optional giveaways of $OPTIV tokens to active, paying users", "Additional entries or bonuses for referrals made up to six tiers", "Nominal indirect referral rewards (Tiers 2–6), decreasing by 15% per tier to ensure fairness and sustainability", "<i>Disclaimer: Giveaways and launch bonuses are optional and time-limited. They have no guaranteed or intrinsic monetary value and are subject to change.</i>"] },
+        { "title": "Program Administration & Authority", "content": ["Optivus reserves the right to:", "Modify, suspend, or terminate the Program at any time without prior notice", "Make final decisions on disputes, fraud investigations, and eligibility assessments", "Determine bonus eligibility, limit rewards, and enforce Program rules in its sole discretion", "To remain eligible for referral bonuses, participants must:", "Maintain an active, paid OPTiVision subscription", "Adhere to all Optivus platform policies, including the Terms of Use", "Ensure all promotional activity remains lawful and aligned with platform guidelines"] },
         { "title": "Acknowledgment of Terms", "content": ["By participating in the Referral Program, you acknowledge and agree that:", "You are purchasing access to OPTiVision tools and services—not an investment product", "Referral bonuses and token giveaways are optional promotional incentives and are not guaranteed", "Participation in the Referral Program is secondary to the core utility and access provided by OPTiVision", "You understand and accept that all rewards are discretionary, limited in nature, and may be modified or revoked"] }
     ],
     "contact": {
@@ -404,8 +412,8 @@
     }
   },
   "testingBanner": {
-    "title": "Testing Mode Active",
-    "description": "This application is running in a simulated environment. All data is mock data.",
+    "title": "Live Demo",
+    "description": "This is a live demonstration environment. You can use the credentials below for testing.",
     "userLogin": "User Login:",
     "email": "Email:",
     "pass": "Pass:",
@@ -424,20 +432,20 @@
     },
     "overview": {
         "welcome": "Welcome back, {{name}}!",
-        "subtitle": "Here's a snapshot of your protocol activity and earnings.",
+        "subtitle": "Here’s a snapshot of your protocol activity and earnings.",
         "totalEarnings": "Total Earnings",
         "totalTeamSize": "Total Team Size",
         "directReferrals": "Direct Referrals",
         "downlineTitle": "Your Downline",
         "level": "Level",
         "users": "Users",
-        "earningsFromTier": "Earnings From Tier"
+        "earningsFromTier": "Earnings from Tier"
     },
     "referralCard": {
         "title": "Share & Earn",
         "linkTab": "Referral Link",
         "codeTab": "Referral Code",
-        "shareText": "Join me on Optivus Protocol and earn commissions! Use my link to get started:",
+        "shareText": "Join me on the Optivus Protocol and earn commissions! Use my link to get started:",
         "shareAria": "Or share directly on social media:",
         "socials": {
           "x": "Share on X",
@@ -454,7 +462,7 @@
         "directReferrals": "Direct Referrals",
         "structureTitle": "Team Structure",
         "joined": "Joined",
-        "earningsFrom": "Earnings From",
+        "earningsFrom": "Earnings from",
         "noReferrals": "You haven't referred anyone yet. Share your referral code to start building your team!"
     },
     "withdraw": {
@@ -506,7 +514,7 @@
         "rejected": {
             "title": "Submission Rejected",
             "reason": "Reason: {{reason}}",
-            "noReason": "Reason: No reason provided.",
+            "noReason": "Reason: no reason provided.",
             "instruction": "Please correct the issues and resubmit your information below."
         },
         "form": {
@@ -521,7 +529,7 @@
             "docUpload": "Document Upload",
             "docInstruction": "Upload a clear image of your Passport or Driver's License.",
             "payoutMethod": "Set Up Payout Method",
-            "payoutConnected": "Stripe Account Connected Successfully",
+            "payoutConnected": "Stripe Account Successfully Connected",
             "payoutInstruction": "Connect a Stripe account to receive payouts.",
             "payoutButton": "Connect with Stripe",
             "submitButton": "Submit for Verification",
@@ -547,7 +555,7 @@
         },
         "pin": {
             "title": "Manage Withdrawal PIN",
-            "isSet": "Your PIN is set. For security, PIN reset is handled via support.",
+            "isSet": "Your PIN has been set. For security, PIN resets are handled via support.",
             "newPin": "New 4-6 Digit PIN",
             "confirmPin": "Confirm PIN",
             "buttonSet": "Set PIN",
@@ -562,7 +570,7 @@
             "enableModalTitle": "Enable 2FA",
             "disableModalTitle": "Disable 2FA",
             "enableStep1": "1. Scan the QR code with your authenticator app.",
-            "enableStep2": "Or manually enter this key:",
+            "enableStep2": "Or enter this key manually:",
             "enableStep3": "2. Enter the 6-digit code from your app.",
             "verificationCode": "Verification Code",
             "buttonVerifyEnable": "Verify & Enable",
@@ -576,7 +584,7 @@
     "title": "Admin: {{tab}}",
     "loginPage": {
         "title": "Admin Portal",
-        "subtitle": "Please login to continue.",
+        "subtitle": "Please log in to continue.",
         "emailPlaceholder": "Admin Email",
         "passwordPlaceholder": "Admin Password",
         "button": "Login",
@@ -589,35 +597,48 @@
         "kycManagement": "KYC Management",
         "withdrawals": "Withdrawals",
         "transactions": "Transactions",
-        "role": "Administrator"
+        "role": "Administrator",
+        "settings": "Settings"
     },
     "overview": {
         "title": "Admin Dashboard",
         "masterDashboardTitle": "Master Account Dashboard",
-        "totalRefEarnings": "Total Referral Earnings",
+        "myRefEarnings": "My Referral Earnings",
         "balance": "Balance",
         "withdrawalsCard": {
             "title": "Withdrawal Management",
             "subtitle": "Manage and withdraw the master account's balance.",
-            "link": "Go to Withdrawals →"
+            "withdraw_button": "Withdraw My Balance",
+            "manage_users_link": "Manage User Withdrawals →"
         },
         "platformControlsTitle": "Platform Controls & Overview",
         "totalUserEarnings": "Total User Referral Earnings",
         "totalUserEarningsDesc": "The cumulative amount of commissions and bonuses distributed to all users.",
         "protocolBalance": "Remaining Protocol Balance",
-        "protocolBalanceDesc": "This is the remaining balance from fees available for withdrawal by the protocol administrators.",
+        "protocolBalanceDesc": "This is the remaining balance from fees available to be withdrawn by protocol administrators.",
         "totalUsers": "Total Users",
         "pendingWithdrawals": "Pending Withdrawals",
         "masterAccountCard": {
             "title": "Master Account",
-            "desc": "This is the premade account from which all referral chains stem.",
+            "desc": "This is the pre-made account from which all referral chains originate.",
             "username": "Username:",
             "refCode": "Ref Code:"
         },
         "globalWithdrawalsCard": {
             "title": "Global Withdrawal Controls",
             "allUserWithdrawals": "All User Withdrawals",
-            "desc": "This switch immediately pauses or unpauses withdrawals for all users on the platform."
+            "desc": "This switch immediately pauses or resumes withdrawals for all users on the platform."
+        },
+        "metricsExplainedTitle": "Metrics Explained",
+        "metrics": {
+            "myEarningsTitle": "What are 'My Referral Earnings'?",
+            "myEarningsDesc": "This is the total commission earned directly by the 'master' admin account through its own referral code.",
+            "myBalanceTitle": "What is 'My Balance'?",
+            "myBalanceDesc": "This is the current withdrawable balance held by the 'master' admin account itself, separate from the main protocol funds.",
+            "totalUserEarningsTitle": "What are 'Total User Referral Earnings'?",
+            "totalUserEarningsDesc": "This represents the grand total of all commissions that have been paid out from the protocol to every user in the system.",
+            "protocolBalanceTitle": "What is the 'Protocol Balance'?",
+            "protocolBalanceDesc": "This figure shows the total funds held by the protocol after all user commissions have been deducted. It is the primary pool of funds available for administrative withdrawal."
         }
     },
     "userManagement": {
@@ -653,7 +674,7 @@
         "lastName": "Last Name",
         "email": "Email Address",
         "username": "Username",
-        "referrer": "Referrer's Username (Optional)",
+        "referrer": "Referrer Code",
         "password": "Password",
         "passwordNote": "A default password is provided. The user can change this after logging in.",
         "button": "Create User"
@@ -677,9 +698,38 @@
         "rejectionModal": {
             "title": "Reject KYC Submission",
             "prompt": "Please provide a reason for rejecting the submission for {{name}}.",
-            "reasonLabel": "Rejection Reason (optional)",
+            "reasonLabel": "Reason for rejection (optional)",
             "reasonPlaceholder": "e.g., Document was blurry.",
             "confirm": "Confirm Rejection"
+        }
+    },
+    "settings": {
+        "title": "Admin Settings",
+        "password": {
+            "title": "Change Password",
+            "current": "Current Password",
+            "new": "New Password",
+            "confirm": "Confirm New Password",
+            "button": "Change Password"
+        },
+        "pin": {
+            "changeButton": "Change PIN",
+            "currentPassword": "Current Admin Password",
+            "saveButton": "Save New PIN"
+        },
+        "2fa": {
+            "title": "Two-Factor Authentication (2FA)",
+            "description": "Enhance your account security by requiring a second verification step on login.",
+            "enableModalTitle": "Enable 2FA",
+            "disableModalTitle": "Disable 2FA",
+            "enableStep1": "1. Scan this QR code with your authenticator app.",
+            "enableStep2": "Or enter this key manually:",
+            "enableStep3": "2. Enter the 6-digit code from your app.",
+            "verificationCode": "Verification Code",
+            "buttonVerifyEnable": "Verify & Enable",
+            "disablePrompt": "To confirm, please enter a 6-digit code from your authenticator app.",
+            "authCode": "Authentication Code",
+            "buttonVerifyDisable": "Confirm & Disable"
         }
     }
   }
